@@ -1,5 +1,38 @@
 [
     {
+        "label": "django.db.models.deletion",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.db.models.deletion",
+        "description": "django.db.models.deletion",
+        "detail": "django.db.models.deletion",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "admin",
         "importPath": "django.contrib",
         "description": "django.contrib",
@@ -24,14 +57,6 @@
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
         "label": "BaseUserManager",
         "importPath": "django.contrib.auth.models",
         "description": "django.contrib.auth.models",
@@ -45,6 +70,47 @@
         "description": "django.contrib.auth.models",
         "isExtraImport": true,
         "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "HttpResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "Faker",
+        "importPath": "faker",
+        "description": "faker",
+        "isExtraImport": true,
+        "detail": "faker",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicProvider",
+        "importPath": "faker.providers",
+        "description": "faker.providers",
+        "isExtraImport": true,
+        "detail": "faker.providers",
+        "documentation": {}
+    },
+    {
+        "label": "randint",
+        "importPath": "random",
+        "description": "random",
+        "isExtraImport": true,
+        "detail": "random",
         "documentation": {}
     },
     {
@@ -179,6 +245,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.api.migrations.0001_initial",
+        "description": "backend.api.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='ClassRoom',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('designation', models.CharField(max_length=200, unique=True)),",
+        "detail": "backend.api.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
         "label": "ApiConfig",
         "kind": 6,
         "importPath": "backend.api.apps",
@@ -269,6 +344,15 @@
         "documentation": {}
     },
     {
+        "label": "seed",
+        "kind": 2,
+        "importPath": "backend.api.seeders",
+        "description": "backend.api.seeders",
+        "peekOfCode": "def seed(request) -> HttpResponse:\n  print(\"Dropping database...\")\n  StudentPromotion.objects.all().delete()\n  PromotionCourse.objects.all().delete()\n  ClassRoom.objects.all().delete()\n  Course.objects.all().delete()\n  Promotion.objects.all().delete()\n  User.objects.all().delete()\n  Student.objects.all().delete()\n  Teacher.objects.all().delete()",
+        "detail": "backend.api.seeders",
+        "documentation": {}
+    },
+    {
         "label": "StudentSerializer",
         "kind": 6,
         "importPath": "backend.api.serializers",
@@ -291,7 +375,7 @@
         "kind": 5,
         "importPath": "backend.api.urls",
         "description": "backend.api.urls",
-        "peekOfCode": "app_name = \"api\"\nurlpatterns = [\n    path('student/', views.studentViews, name=\"Student-list\"),\n    path('student/<str:pk>', views.studentViews, name=\"Student\"),\n]",
+        "peekOfCode": "app_name = \"api\"\nurlpatterns = [\n    path('student/', views.studentViews, name=\"Student-list\"),\n    path('student/<str:pk>', views.studentViews, name=\"Student\"),\n    path('seed/', seeders.seed, name=\"Seeding\"),\n]",
         "detail": "backend.api.urls",
         "documentation": {}
     },
@@ -300,7 +384,7 @@
         "kind": 5,
         "importPath": "backend.api.urls",
         "description": "backend.api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('student/', views.studentViews, name=\"Student-list\"),\n    path('student/<str:pk>', views.studentViews, name=\"Student\"),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('student/', views.studentViews, name=\"Student-list\"),\n    path('student/<str:pk>', views.studentViews, name=\"Student\"),\n    path('seed/', seeders.seed, name=\"Seeding\"),\n]",
         "detail": "backend.api.urls",
         "documentation": {}
     },
