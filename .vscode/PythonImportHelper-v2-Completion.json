@@ -96,11 +96,19 @@
         "documentation": {}
     },
     {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
         "isExtraImport": true,
-        "detail": "django.shortcuts",
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "api_view",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
         "documentation": {}
     },
     {
@@ -303,6 +311,15 @@
         "description": "backend.api.utils",
         "peekOfCode": "class Utils:\n    def _list(model, model_serializer) -> Response:\n        elements = model.objects.all().order_by('-updated_at')\n        serializer = model_serializer(elements, many = True)\n        return Response(serializer.data)\n    def _get(model, model_serializer, param) -> Response:\n        element = model.objects.get(id = param)\n        serializer = model_serializer(element, many = False)\n        return Response(serializer.data)",
         "detail": "backend.api.utils",
+        "documentation": {}
+    },
+    {
+        "label": "studentViews",
+        "kind": 2,
+        "importPath": "backend.api.views",
+        "description": "backend.api.views",
+        "peekOfCode": "def studentViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Student, StudentSerializer)\n        else:\n            return Utils._get(Student, StudentSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_student = Student.objects.create_user(\n            email = data['email'],",
+        "detail": "backend.api.views",
         "documentation": {}
     },
     {
