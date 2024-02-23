@@ -88,6 +88,14 @@
         "documentation": {}
     },
     {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
         "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
@@ -286,6 +294,15 @@
         "description": "backend.api.urls",
         "peekOfCode": "urlpatterns = [\n    path('student/', views.studentViews, name=\"Student-list\"),\n    path('student/<str:pk>', views.studentViews, name=\"Student\"),\n]",
         "detail": "backend.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "Utils",
+        "kind": 6,
+        "importPath": "backend.api.utils",
+        "description": "backend.api.utils",
+        "peekOfCode": "class Utils:\n    def _list(model, model_serializer) -> Response:\n        elements = model.objects.all().order_by('-updated_at')\n        serializer = model_serializer(elements, many = True)\n        return Response(serializer.data)\n    def _get(model, model_serializer, param) -> Response:\n        element = model.objects.get(id = param)\n        serializer = model_serializer(element, many = False)\n        return Response(serializer.data)",
+        "detail": "backend.api.utils",
         "documentation": {}
     },
     {
