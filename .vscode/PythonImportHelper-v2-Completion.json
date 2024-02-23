@@ -32,11 +32,59 @@
         "documentation": {}
     },
     {
+        "label": "BaseUserManager",
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "AbstractBaseUser",
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "ModelSerializer",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
+        "isExtraImport": true,
+        "detail": "rest_framework.serializers",
+        "documentation": {}
+    },
+    {
         "label": "TestCase",
         "importPath": "django.test",
         "description": "django.test",
         "isExtraImport": true,
         "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
         "documentation": {}
     },
     {
@@ -70,14 +118,6 @@
         "description": "pathlib",
         "isExtraImport": true,
         "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "path",
-        "importPath": "django.urls",
-        "description": "django.urls",
-        "isExtraImport": true,
-        "detail": "django.urls",
         "documentation": {}
     },
     {
@@ -132,6 +172,123 @@
         "documentation": {}
     },
     {
+        "label": "MyUserManager",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class MyUserManager(BaseUserManager):\n    def create_user(self, email, first_name, last_name, sexe, birthday, address, phone, password = None):\n        if not email:\n            return ValueError(\"Une addresse mail est obligatoire\")\n        user = self.model(\n            email = self.normalize_email(email),\n            first_name = first_name,\n            last_name = last_name,\n            sexe = sexe,\n            birthday = birthday,",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class User(AbstractBaseUser):\n    email = models.EmailField(\n        max_length = 150,\n        unique = True,\n        verbose_name = \"Adresse mail\"\n    )\n    first_name = models.CharField(max_length = 70)\n    last_name = models.CharField(max_length = 70)\n    SEX_TYPES = (\n        ('M', 'Masculin'),",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "Student",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class Student(User):\n    class Meta:\n        verbose_name = \"Etudiant\"\nclass Promotion(models.Model):\n    designation = models.CharField(\n        max_length = 150,\n        unique = True,\n    )\n    created_at = models.DateTimeField(auto_now_add  = True)\n    updated_at = models.DateTimeField(auto_now = True)",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "Promotion",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class Promotion(models.Model):\n    designation = models.CharField(\n        max_length = 150,\n        unique = True,\n    )\n    created_at = models.DateTimeField(auto_now_add  = True)\n    updated_at = models.DateTimeField(auto_now = True)\n    class Meta:\n        verbose_name = \"Classes | Promotion\"\n    def __str__(self) -> str:",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "Teacher",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class Teacher(User):\n    class Meta:\n        verbose_name = \"Prof\"\nclass StudentPromotion(models.Model):\n    student = models.OneToOneField(Student, on_delete = models.CASCADE)\n    promo = models.ForeignKey(Promotion, on_delete = models.CASCADE)\n    class Meta:\n        verbose_name = \"Etudiant de :\"\n        verbose_name_plural = \"Etudiants de :\"\n    def __str__(self) -> str:",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "StudentPromotion",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class StudentPromotion(models.Model):\n    student = models.OneToOneField(Student, on_delete = models.CASCADE)\n    promo = models.ForeignKey(Promotion, on_delete = models.CASCADE)\n    class Meta:\n        verbose_name = \"Etudiant de :\"\n        verbose_name_plural = \"Etudiants de :\"\n    def __str__(self) -> str:\n        return self.promo.designation\nclass Course(models.Model):\n    designation = models.CharField(",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "Course",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class Course(models.Model):\n    designation = models.CharField(\n        max_length = 255,\n        unique = True,\n    )\n    description = models.TextField(\n        blank = True,\n        null = True,\n    )\n    created_at = models.DateTimeField(auto_now_add  = True)",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "PromotionCourse",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class PromotionCourse(models.Model):\n    course = models.ForeignKey(Course, on_delete = models.CASCADE)\n    promo = models.ForeignKey(Promotion, on_delete = models.CASCADE)\n    class Meta:\n        verbose_name = \"Cours par classe :\"\n        verbose_name_plural = verbose_name\n    def __str__(self) -> str:\n        return f\"{self.promo} cours : {self.course}\"\nclass ClassRoom(models.Model):\n    designation = models.CharField(",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "ClassRoom",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class ClassRoom(models.Model):\n    designation = models.CharField(\n        max_length = 200,\n        unique = True,\n    )\n    description = models.TextField(\n        blank = True,\n        null = True,\n    )\n    created_at = models.DateTimeField(auto_now_add  = True)",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "StudentSerializer",
+        "kind": 6,
+        "importPath": "backend.api.serializers",
+        "description": "backend.api.serializers",
+        "peekOfCode": "class StudentSerializer(ModelSerializer):\n    class Meta:\n        model = Student\n        fields = \"__all__\"\nclass TeacherSerializer(ModelSerializer):\n    class Meta:\n        model = Teacher\n        fields = \"__all__\"",
+        "detail": "backend.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "TeacherSerializer",
+        "kind": 6,
+        "importPath": "backend.api.serializers",
+        "description": "backend.api.serializers",
+        "peekOfCode": "class TeacherSerializer(ModelSerializer):\n    class Meta:\n        model = Teacher\n        fields = \"__all__\"",
+        "detail": "backend.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "app_name",
+        "kind": 5,
+        "importPath": "backend.api.urls",
+        "description": "backend.api.urls",
+        "peekOfCode": "app_name = \"api\"\nurlpatterns = [\n    path('student/', views.studentViews, name=\"Student-list\"),\n    path('student/<str:pk>', views.studentViews, name=\"Student\"),\n]",
+        "detail": "backend.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "backend.api.urls",
+        "description": "backend.api.urls",
+        "peekOfCode": "urlpatterns = [\n    path('student/', views.studentViews, name=\"Student-list\"),\n    path('student/<str:pk>', views.studentViews, name=\"Student\"),\n]",
+        "detail": "backend.api.urls",
+        "documentation": {}
+    },
+    {
         "label": "application",
         "kind": 5,
         "importPath": "backend.backend.asgi",
@@ -172,7 +329,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n]",
+        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'corsheaders',",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -181,7 +338,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n]\nMIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'corsheaders',\n    'rest_framework',\n    'api',",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -190,7 +347,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\nROOT_URLCONF = 'backend.urls'",
+        "peekOfCode": "MIDDLEWARE = [\n    'corsheaders.middleware.CorsMiddleware',\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -217,7 +374,25 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "WSGI_APPLICATION = 'backend.wsgi.application'\n# Database\n# https://docs.djangoproject.com/en/5.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n# Password validation",
+        "peekOfCode": "WSGI_APPLICATION = 'backend.wsgi.application'\nCORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_ALL_HEADERS = True\n# Database\n# https://docs.djangoproject.com/en/5.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }",
+        "detail": "backend.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_ALL_ORIGINS",
+        "kind": 5,
+        "importPath": "backend.backend.settings",
+        "description": "backend.backend.settings",
+        "peekOfCode": "CORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_ALL_HEADERS = True\n# Database\n# https://docs.djangoproject.com/en/5.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}",
+        "detail": "backend.backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_ALL_HEADERS",
+        "kind": 5,
+        "importPath": "backend.backend.settings",
+        "description": "backend.backend.settings",
+        "peekOfCode": "CORS_ALLOW_ALL_HEADERS = True\n# Database\n# https://docs.djangoproject.com/en/5.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n# Password validation",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -244,7 +419,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "LANGUAGE_CODE = 'en-us'\nTIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "LANGUAGE_CODE = 'fr-FR'\nTIME_ZONE = 'Africa/Brazzaville'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -253,7 +428,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "TIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "TIME_ZONE = 'Africa/Brazzaville'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -298,7 +473,7 @@
         "kind": 5,
         "importPath": "backend.backend.urls",
         "description": "backend.backend.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('api/', include('api.urls')),\n]",
         "detail": "backend.backend.urls",
         "documentation": {}
     },
