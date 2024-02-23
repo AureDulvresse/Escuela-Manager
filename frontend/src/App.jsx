@@ -1,35 +1,86 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-function App() {
-  const [count, setCount] = useState(0)
+import ErrorPage from "./pages/ErrorPage";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Academy from "./pages/Academy";
 
+import Welcome from "./components/Layout/Welcome";
+
+import Student from "./components/Student";
+import Notes from "./components/Notes";
+
+const queryClient = new QueryClient();
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Dashboard />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "academy/",
+        element: <Academy />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: "",
+            element: <Welcome msg="Academie" />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: "student/",
+            element: <Student />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: "notes/",
+            element: <Notes />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        path: "administration/",
+        element: <Academy />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: "",
+            element: <Welcome msg="Administration" />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: "student/",
+            element: <Student />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: "notes/",
+            element: <Notes />,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+    ],
+  },
+]);
+
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </React.StrictMode>
+  );
+};
 
-export default App
+export default App;
