@@ -23,7 +23,7 @@ const Student = () => {
           </Link>
         </div>
       </SubTitleLayout>
-      <div className="mt-6 mr-2 py-4 px-2 bg-white shadow-md rounded-md border border-indigo-500">
+      <div className="mt-6 mr-2 py-4 px-2 rounded-md shadow-sm bg-white">
         <Outlet />
       </div>
     </div>
