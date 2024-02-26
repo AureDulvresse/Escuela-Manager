@@ -9,6 +9,23 @@
         "documentation": {}
     },
     {
+        "label": "shortuuid.django_fields",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shortuuid.django_fields",
+        "description": "shortuuid.django_fields",
+        "detail": "shortuuid.django_fields",
+        "documentation": {}
+    },
+    {
+        "label": "ShortUUIDField",
+        "importPath": "shortuuid.django_fields",
+        "description": "shortuuid.django_fields",
+        "isExtraImport": true,
+        "detail": "shortuuid.django_fields",
+        "documentation": {}
+    },
+    {
         "label": "migrations",
         "importPath": "django.db",
         "description": "django.db",
@@ -249,7 +266,7 @@
         "kind": 6,
         "importPath": "backend.api.migrations.0001_initial",
         "description": "backend.api.migrations.0001_initial",
-        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='ClassRoom',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('designation', models.CharField(max_length=200, unique=True)),",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='ClassRoom',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('uuid', shortuuid.django_fields.ShortUUIDField(alphabet='opqrstuvwxyz123456789', length=10, max_length=30, prefix='classroom', unique=True)),",
         "detail": "backend.api.migrations.0001_initial",
         "documentation": {}
     },
@@ -285,7 +302,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class Student(User):\n    class Meta:\n        verbose_name = \"Etudiant\"\nclass Promotion(models.Model):\n    designation = models.CharField(\n        max_length = 150,\n        unique = True,\n    )\n    created_at = models.DateTimeField(auto_now_add  = True)\n    updated_at = models.DateTimeField(auto_now = True)",
+        "peekOfCode": "class Student(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')\n    class Meta:\n        verbose_name = \"Etudiant\"\nclass Promotion(models.Model):\n    designation = models.CharField(\n        max_length = 150,\n        unique = True,\n    )\n    created_at = models.DateTimeField(auto_now_add  = True)",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -303,7 +320,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class Teacher(User):\n    class Meta:\n        verbose_name = \"Prof\"\nclass StudentPromotion(models.Model):\n    student = models.OneToOneField(Student, on_delete = models.CASCADE)\n    promo = models.ForeignKey(Promotion, on_delete = models.CASCADE)\n    class Meta:\n        verbose_name = \"Etudiant de :\"\n        verbose_name_plural = \"Etudiants de :\"\n    def __str__(self) -> str:",
+        "peekOfCode": "class Teacher(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='teacher' , alphabet='abcdefghijklmn123456789')\n    class Meta:\n        verbose_name = \"Prof\"\nclass StudentPromotion(models.Model):\n    student = models.OneToOneField(Student, on_delete = models.CASCADE)\n    promo = models.ForeignKey(Promotion, on_delete = models.CASCADE)\n    class Meta:\n        verbose_name = \"Etudiant de :\"\n        verbose_name_plural = \"Etudiants de :\"",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -312,7 +329,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class StudentPromotion(models.Model):\n    student = models.OneToOneField(Student, on_delete = models.CASCADE)\n    promo = models.ForeignKey(Promotion, on_delete = models.CASCADE)\n    class Meta:\n        verbose_name = \"Etudiant de :\"\n        verbose_name_plural = \"Etudiants de :\"\n    def __str__(self) -> str:\n        return self.promo.designation\nclass Course(models.Model):\n    designation = models.CharField(",
+        "peekOfCode": "class StudentPromotion(models.Model):\n    student = models.OneToOneField(Student, on_delete = models.CASCADE)\n    promo = models.ForeignKey(Promotion, on_delete = models.CASCADE)\n    class Meta:\n        verbose_name = \"Etudiant de :\"\n        verbose_name_plural = \"Etudiants de :\"\n    def __str__(self) -> str:\n        return self.promo.designation\nclass Course(models.Model):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='course' , alphabet='opqrstuvwxyz123456789')",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -321,7 +338,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class Course(models.Model):\n    designation = models.CharField(\n        max_length = 255,\n        unique = True,\n    )\n    description = models.TextField(\n        blank = True,\n        null = True,\n    )\n    created_at = models.DateTimeField(auto_now_add  = True)",
+        "peekOfCode": "class Course(models.Model):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='course' , alphabet='opqrstuvwxyz123456789')\n    designation = models.CharField(\n        max_length = 255,\n        unique = True,\n    )\n    description = models.TextField(\n        blank = True,\n        null = True,\n    )",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -330,7 +347,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class PromotionCourse(models.Model):\n    course = models.ForeignKey(Course, on_delete = models.CASCADE)\n    promo = models.ForeignKey(Promotion, on_delete = models.CASCADE)\n    class Meta:\n        verbose_name = \"Cours par classe :\"\n        verbose_name_plural = verbose_name\n    def __str__(self) -> str:\n        return f\"{self.promo} cours : {self.course}\"\nclass ClassRoom(models.Model):\n    designation = models.CharField(",
+        "peekOfCode": "class PromotionCourse(models.Model):\n    course = models.ForeignKey(Course, on_delete = models.CASCADE)\n    promo = models.ForeignKey(Promotion, on_delete = models.CASCADE)\n    class Meta:\n        verbose_name = \"Cours par classe :\"\n        verbose_name_plural = verbose_name\n    def __str__(self) -> str:\n        return f\"{self.promo} cours : {self.course}\"\nclass ClassRoom(models.Model):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='classroom' , alphabet='opqrstuvwxyz123456789')",
         "detail": "backend.api.models",
         "documentation": {}
     },
@@ -339,7 +356,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class ClassRoom(models.Model):\n    designation = models.CharField(\n        max_length = 200,\n        unique = True,\n    )\n    description = models.TextField(\n        blank = True,\n        null = True,\n    )\n    created_at = models.DateTimeField(auto_now_add  = True)",
+        "peekOfCode": "class ClassRoom(models.Model):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='classroom' , alphabet='opqrstuvwxyz123456789')\n    designation = models.CharField(\n        max_length = 200,\n        unique = True,\n    )\n    description = models.TextField(\n        blank = True,\n        null = True,\n    )",
         "detail": "backend.api.models",
         "documentation": {}
     },

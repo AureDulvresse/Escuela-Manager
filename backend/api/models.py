@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from shortuuid.django_fields import ShortUUIDField
 
 # Create your models here.
 class MyUserManager(BaseUserManager):
@@ -103,6 +104,7 @@ class User(AbstractBaseUser):
 
 class Student(User):
 
+    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')
     class Meta:
         verbose_name = "Etudiant"
     
@@ -123,6 +125,7 @@ class Promotion(models.Model):
 
 class Teacher(User):
 
+    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='teacher' , alphabet='abcdefghijklmn123456789')
     class Meta:
         verbose_name = "Prof"
 
@@ -138,7 +141,7 @@ class StudentPromotion(models.Model):
         return self.promo.designation
 
 class Course(models.Model):
-    
+    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='course' , alphabet='opqrstuvwxyz123456789')
     designation = models.CharField(
         max_length = 255,
         unique = True,
@@ -169,7 +172,7 @@ class PromotionCourse(models.Model):
         return f"{self.promo} cours : {self.course}"
 
 class ClassRoom(models.Model):
-
+    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='classroom' , alphabet='opqrstuvwxyz123456789')
     designation = models.CharField(
         max_length = 200,
         unique = True,
