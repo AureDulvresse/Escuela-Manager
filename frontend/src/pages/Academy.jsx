@@ -1,5 +1,5 @@
 import React from "react";
-import { BiBookAlt, BiBookOpen, BiSolidPencil, BiUser } from "react-icons/bi";
+import { BiBookAlt, BiBookOpen, BiBuildingHouse, BiSolidPencil, BiTime, BiUser } from "react-icons/bi";
 import { NavLink, Outlet } from "react-router-dom";
 import SubTitleLayout from "../components/Layout/SubTitleLayout";
 
@@ -44,9 +44,18 @@ const Academy = () => {
             to={"/"}
             className="flex items-center justify-around gap-5 px-4 py-3 hover:border-b-indigo-600 hover:border-b-2 cursor-pointer"
           >
-            <BiUser className="text-indigo-600 text-[24px] leading-4" />
+            <BiBuildingHouse className="text-indigo-600 text-[24px] leading-4" />
             <p className="text-[14px] leading-3 font-bold text-indigo-600">
-              Etudiant
+              Classe
+            </p>
+          </NavLink>
+          <NavLink
+            to={"/"}
+            className="flex items-center justify-around gap-5 px-4 py-3 hover:border-b-indigo-600 hover:border-b-2 cursor-pointer"
+          >
+            <BiTime className="text-indigo-600 text-[24px] leading-4" />
+            <p className="text-[14px] leading-3 font-bold text-indigo-600">
+              Emplois du temps
             </p>
           </NavLink>
         </div>

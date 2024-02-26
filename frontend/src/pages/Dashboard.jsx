@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import StatBox from "../components/StatComponents/StatBox";
-import BarChart from "../components/StatComponents/BarChart";
-import LineChart from "../components/StatComponents/LineChart";
+import StatBox from "../components/Dashboard/StatBox";
+import BarChart from "../components/Dashboard/BarChart";
+import LineChart from "../components/Dashboard/LineChart";
 import { BiFile, BiSolidGraduation } from "react-icons/bi";
 import SubTitleLayout from "../components/Layout/SubTitleLayout";
 

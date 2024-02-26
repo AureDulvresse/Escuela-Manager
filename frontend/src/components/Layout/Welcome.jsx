@@ -1,5 +1,3 @@
-import React from "react";
-
 const Welcome = ({ msg }) => {
   return (
     <>
@@ -11,9 +9,6 @@ const Welcome = ({ msg }) => {
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-indigo-600 sm:text-5xl">
             {msg}
           </h1>
-          <p className="mt-6 text-base leading-7 text-gray-800">
-            Choisissez une section parmis celle à gauche
-          </p>
         </div>
       </main>
     </>
