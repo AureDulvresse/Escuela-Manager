@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import ErrorRequest from "../ErrorRequest";
@@ -6,6 +7,8 @@ import { Link } from "react-router-dom";
 import { BiPencil, BiTrashAlt } from "react-icons/bi";
 
 const StudentList = () => {
+  const [search, setSearch] = useState("");
+
   const queryKey = ["getStudent"];
   const { isLoading, data, error } = useQuery({
     queryKey: queryKey,
@@ -109,9 +112,10 @@ const StudentList = () => {
         <div className="flex items-center">
           <input
             type="text"
-            className="h-[35px] w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
+            className="h-[38px] w-full bg-white text-slate-700 focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
+            value={search}
             placeholder="Taper une recherche..."
-            
+            onChange={(event) => setSearch(event.target.value)}
           />
         </div>
       </div>
@@ -136,40 +140,49 @@ const StudentList = () => {
           </tr>
         </thead>
         <tbody className="w-full">
-          {listStudent.map((student, index) => {
-            return (
-              <tr
-                className="border-t border-l border-r border-slate-200 py-3 px-1 hover:bg-slate-50"
-                key={index}
-              >
-                <td className="text-[18px] font-semibold text-center">
-                  {index + 1}
-                </td>
-                <td className="text-[18px] text-indigo-600 font-normal text-center">
-                  <Link to={student.uuid + "/show"}>
-                    {student.first_name} {student.last_name}
-                  </Link>
-                </td>
-                <td className="text-[18px] text-indigo-600 font-normal text-center">
-                  {student.sexe}
-                </td>
-                <td className="text-[18px] text-indigo-600 font-normal text-center">
-                  Terminal C2
-                </td>
-                <td className="flex justify-center gap-3 py-2">
-                  <Link className="w-[40px] py-2 px-2 rounded-md text-indigo-600 hover:text-white border border-indigo-400 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 flex items-center justify-center">
-                    <BiPencil className="text-[18px] " />
-                  </Link>
-                  <Link
-                    to={student.uuid + "/remove"}
-                    className="w-[40px] px-2 py-2 rounded-md text-red-600 hover:text-white border border-red-500 shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 flex items-center justify-center"
-                  >
-                    <BiTrashAlt className="text-[18px] " />
-                  </Link>
-                </td>
-              </tr>
-            );
-          })}
+          {listStudent
+            .filter((student) => {
+              return search.toLowerCase() === ""
+                ? student
+                : (student.first_name.toLowerCase().includes(search) &&
+                    student.last_name.toLowerCase().includes(search)) ||
+                    student.first_name.toLowerCase().includes(search) ||
+                    student.last_name.toLowerCase().includes(search);
+            })
+            .map((student, index) => {
+              return (
+                <tr
+                  className="border-t border-l border-r border-slate-200 py-3 px-1 hover:bg-slate-50"
+                  key={index}
+                >
+                  <td className="text-[18px] font-semibold text-center">
+                    {index + 1}
+                  </td>
+                  <td className="text-[18px] text-indigo-600 font-normal text-center">
+                    <Link to={student.uuid + "/show"}>
+                      {student.first_name} {student.last_name}
+                    </Link>
+                  </td>
+                  <td className="text-[18px] text-indigo-600 font-normal text-center">
+                    {student.sexe}
+                  </td>
+                  <td className="text-[18px] text-indigo-600 font-normal text-center">
+                    Terminal C2
+                  </td>
+                  <td className="flex justify-center gap-3 py-2">
+                    <Link className="w-[40px] py-2 px-2 rounded-md text-indigo-600 hover:text-white border border-indigo-400 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 flex items-center justify-center">
+                      <BiPencil className="text-[18px] " />
+                    </Link>
+                    <Link
+                      to={student.uuid + "/remove"}
+                      className="w-[40px] px-2 py-2 rounded-md text-red-600 hover:text-white border border-red-500 shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 flex items-center justify-center"
+                    >
+                      <BiTrashAlt className="text-[18px] " />
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
