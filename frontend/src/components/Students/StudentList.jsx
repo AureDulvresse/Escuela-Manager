@@ -125,16 +125,16 @@ const StudentList = () => {
             <th className="text-[16px] font-light text-slate-700 text-center">
               N°
             </th>
-            <th className="text-[16px] font-light text-slate-7 text-center">
+            <th className="text-[16px] font-light text-slate-700 text-center">
               Nom & Prénom
             </th>
-            <th className="text-[16px] font-light text-slate-7 text-center">
+            <th className="text-[16px] font-light text-slate-700 text-center">
               Sexe
             </th>
-            <th className="text-[16px] font-light text-slate-7 text-center">
+            <th className="text-[16px] font-light text-slate-700 text-center">
               Promotion
             </th>
-            <th className="text-[16px] font-light text-slate-7 text-center">
+            <th className="text-[16px] font-light text-slate-700 text-center">
               Actions
             </th>
           </tr>

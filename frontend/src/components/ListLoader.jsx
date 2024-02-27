@@ -1,13 +1,10 @@
 const ListLoader = () => {
   return (
-    <div className="flex flex-col items-start gap-2">
-      <div className="flex items-center gap-2">
-        <div className="w-4/5">
-          <div className="shadow-sm px-4 flex-wrap py-2 bg-slate-300 dark:bg-slate-600 rounded-md h-[100px] animate-pulse"></div>
-          <div className="bg-white dark:bg-slate-700 rounded-full h-[20px] w-4/5 mb-2 animate-pulse"></div>
-          <div className="bg-white dark:bg-slate-700 rounded-full h-[10px] w-4/5 mb-1 animate-pulse"></div>
-        </div>
-      </div>
+    <div className="flex items-center justify-center flex-col gap-5 h-64 w-full bg-slate-200 rounded-md shadow-sm">
+      <h4 className="text-indigo-600 text-[30px] leading-3 font-medium">
+        Chargement...
+      </h4>
+      <div className="rounded-full bg-slate-50 h-4 w-2/3 border border-indigo-500"></div>
     </div>
   );
 };
