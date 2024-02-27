@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
+import SubTitleLayout from "../components/Layout/SubTitleLayout";
 import StatBox from "../components/Dashboard/StatBox";
 import BarChart from "../components/Dashboard/BarChart";
 import LineChart from "../components/Dashboard/LineChart";
+
 import { BiFile, BiSolidGraduation } from "react-icons/bi";
-import SubTitleLayout from "../components/Layout/SubTitleLayout";
+
+import ListLoader from "../components/ListLoader";
+import ErrorRequest from "../components/ErrorRequest";
 
 const Dashboard = () => {
   const data = [
@@ -32,7 +39,7 @@ const Dashboard = () => {
       year: 2024,
     },
   ];
-  
+
   const [userData, setUserData] = useState({
     labels: data.map((data) => data.year),
     datasets: [
@@ -68,6 +75,15 @@ const Dashboard = () => {
     prepare_data1(data);
     prepare_data2(data);
   }, []);
+
+  const queryKey = ["stats"];
+  const { isLoading, data: stats, error } = useQuery({
+    queryKey: queryKey,
+    queryFn: async () =>
+      await axios
+        .get("http://128.0.0.1:8000/api/stats/")
+        .then((res) => res.data),
+  });
 
   const prepare_data1 = (d) => {
     const prep = {
@@ -107,6 +123,10 @@ const Dashboard = () => {
     };
 
     setUserData2(prep);
+
+    if (isLoading) return <ListLoader />;
+
+    if (error) return <ErrorRequest error={error.message} />;
   };
 
   return (
@@ -132,7 +152,7 @@ const Dashboard = () => {
           <StatBox libelle={"Admis"} value={90}>
             <BiSolidGraduation className="text-indigo-600 text-[48px] leading-3" />
           </StatBox>
-          <StatBox libelle={"Total Etudiant"} value={300}>
+          <StatBox libelle={"Total Etudiant"} value={stats.total_student}>
             <BiSolidGraduation className="text-indigo-600 text-[48px] leading-3" />
           </StatBox>
         </div>

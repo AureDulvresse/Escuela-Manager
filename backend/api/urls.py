@@ -5,11 +5,12 @@ from . import seeders
 app_name = "api"
 
 urlpatterns = [
-    path('student/', views.studentViews, name="Student-list"),
-    path('student/<str:pk>', views.studentViews, name="Student"),
+    path('student/', views.studentView, name="Student-list"),
+    path('student/<str:pk>', views.studentView, name="Student"),
 
-    path('promo/', views.promotionViews, name="Promotion-list"),
-    path('promo/<str:pk>', views.promotionViews, name="Promotion"),
+    path('promo/', views.promotionView, name="Promotion-list"),
+    path('promo/<str:pk>', views.promotionView, name="Promotion"),
 
+    path('stats/', views.statsView, name="stats"),
     path('seed/', seeders.seed, name="Seeding"),
 ]
