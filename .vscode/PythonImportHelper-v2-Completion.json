@@ -298,20 +298,20 @@
         "documentation": {}
     },
     {
-        "label": "Student",
-        "kind": 6,
-        "importPath": "backend.api.models",
-        "description": "backend.api.models",
-        "peekOfCode": "class Student(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')\n    class Meta:\n        verbose_name = \"Etudiant\"\nclass Promotion(models.Model):\n    designation = models.CharField(\n        max_length = 150,\n        unique = True,\n    )\n    created_at = models.DateTimeField(auto_now_add  = True)",
-        "detail": "backend.api.models",
-        "documentation": {}
-    },
-    {
         "label": "Promotion",
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
         "peekOfCode": "class Promotion(models.Model):\n    designation = models.CharField(\n        max_length = 150,\n        unique = True,\n    )\n    created_at = models.DateTimeField(auto_now_add  = True)\n    updated_at = models.DateTimeField(auto_now = True)\n    class Meta:\n        verbose_name = \"Classes | Promotion\"\n    def __str__(self) -> str:",
+        "detail": "backend.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "Student",
+        "kind": 6,
+        "importPath": "backend.api.models",
+        "description": "backend.api.models",
+        "peekOfCode": "class Student(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')\n    promotion = models.ForeignKey(Promotion, on_delete = models.SET_DEFAULT, default = 1)\n    class Meta:\n        verbose_name = \"Etudiant\"\nclass Teacher(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='teacher' , alphabet='abcdefghijklmn123456789')\n    class Meta:\n        verbose_name = \"Prof\"\nclass StudentPromotion(models.Model):",
         "detail": "backend.api.models",
         "documentation": {}
     },

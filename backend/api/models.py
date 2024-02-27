@@ -102,13 +102,6 @@ class User(AbstractBaseUser):
         return self.is_admin
     
 
-class Student(User):
-
-    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')
-    class Meta:
-        verbose_name = "Etudiant"
-    
-
 class Promotion(models.Model):
     designation = models.CharField(
         max_length = 150,
@@ -123,6 +116,13 @@ class Promotion(models.Model):
     def __str__(self) -> str:
         return self.designation
 
+class Student(User):
+
+    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')
+    promotion = models.ForeignKey(Promotion, on_delete = models.SET_DEFAULT, default = 1)
+    class Meta:
+        verbose_name = "Etudiant"
+    
 class Teacher(User):
 
     uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='teacher' , alphabet='abcdefghijklmn123456789')

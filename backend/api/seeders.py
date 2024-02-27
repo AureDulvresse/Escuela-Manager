@@ -36,10 +36,8 @@ def _UserSeeder(n) -> str:
       print("SuperUser created")
     
     for _ in range(n):
-      age = f'- {randint(14, 25)} years'
-
-
-      Student.objects.create_user(
+      promo = Promotion.objects.all().order_by("?").first()
+      stu = Student.objects.create_user(
         fake.unique.email(),
         fake.first_name(),
         fake.last_name(),
@@ -49,8 +47,10 @@ def _UserSeeder(n) -> str:
         fake.phone_number(),
         password = "password"
       )
+      stu.promotion = promo
+      stu.save()
+
     for _ in range(10):
-      teacher_age = f'-{randint(30, 40)} years'
       Teacher.objects.create_user(
         fake.unique.email(),
         fake.first_name(),
@@ -120,8 +120,9 @@ def seed(request) -> HttpResponse:
   print("Database Deleted")
   print("Seeding ")
   
-  print(_UserSeeder(20))
   print(_PromotionSeeder())
   print(_CourseSeeder())
+  print(_UserSeeder(20))
+  
 
   return HttpResponse(f'<h1>Database Seeded </h1>')
