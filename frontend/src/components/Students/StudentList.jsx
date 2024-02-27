@@ -9,16 +9,25 @@ import { BiPencil, BiTrashAlt } from "react-icons/bi";
 const StudentList = () => {
   const [search, setSearch] = useState("");
 
-  const queryKey = ["getStudent"];
+  const queryKey = [["getStudent"], ["getPromotion"]];
   const { isLoading, data, error } = useQuery({
-    queryKey: queryKey,
+    queryKey: queryKey[0],
     queryFn: async () =>
       await axios
         .get("http://127.0.0.1:8000/api/student/")
         .then((res) => res.data),
   });
 
-  const listStudent = data || [];
+  const { data: dataPromo } = useQuery({
+    queryKey: queryKey[1],
+    queryFn: async () =>
+      await axios
+        .get("http://127.0.0.1:8000/api/promo/")
+        .then((res) => res.data),
+  });
+
+  const listStudent = data || [],
+    promotions = dataPromo || [];
 
   //console.log(listStudent);
 
@@ -109,7 +118,7 @@ const StudentList = () => {
             </div>
           </div> */}
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center gap-5">
           <input
             type="text"
             className="h-[38px] w-full bg-white text-slate-700 focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
@@ -117,6 +126,7 @@ const StudentList = () => {
             placeholder="Taper une recherche..."
             onChange={(event) => setSearch(event.target.value)}
           />
+          
         </div>
       </div>
       <table className="w-full rounded-b-md">
@@ -181,7 +191,13 @@ const StudentList = () => {
                     {student.sexe}
                   </td>
                   <td className="text-[18px] text-indigo-600 font-normal text-center">
-                    {student.promotion}
+                    {promotions
+                      .filter((promo) => {
+                        return promo.id == student.promotion;
+                      })
+                      .map((promo) => {
+                        return promo.designation;
+                      })}
                   </td>
                   <td className="flex justify-center gap-3 py-2">
                     <Link className="w-[40px] py-2 px-2 rounded-md text-indigo-600 hover:text-white border border-indigo-400 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 flex items-center justify-center">

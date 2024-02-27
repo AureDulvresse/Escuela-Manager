@@ -401,7 +401,7 @@
         "kind": 5,
         "importPath": "backend.api.urls",
         "description": "backend.api.urls",
-        "peekOfCode": "app_name = \"api\"\nurlpatterns = [\n    path('student/', views.studentViews, name=\"Student-list\"),\n    path('student/<str:pk>', views.studentViews, name=\"Student\"),\n    path('seed/', seeders.seed, name=\"Seeding\"),\n]",
+        "peekOfCode": "app_name = \"api\"\nurlpatterns = [\n    path('student/', views.studentViews, name=\"Student-list\"),\n    path('student/<str:pk>', views.studentViews, name=\"Student\"),\n    path('promo/', views.promotionViews, name=\"Promotion-list\"),\n    path('promo/<str:pk>', views.promotionViews, name=\"Promotion\"),\n    path('seed/', seeders.seed, name=\"Seeding\"),\n]",
         "detail": "backend.api.urls",
         "documentation": {}
     },
@@ -410,7 +410,7 @@
         "kind": 5,
         "importPath": "backend.api.urls",
         "description": "backend.api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('student/', views.studentViews, name=\"Student-list\"),\n    path('student/<str:pk>', views.studentViews, name=\"Student\"),\n    path('seed/', seeders.seed, name=\"Seeding\"),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('student/', views.studentViews, name=\"Student-list\"),\n    path('student/<str:pk>', views.studentViews, name=\"Student\"),\n    path('promo/', views.promotionViews, name=\"Promotion-list\"),\n    path('promo/<str:pk>', views.promotionViews, name=\"Promotion\"),\n    path('seed/', seeders.seed, name=\"Seeding\"),\n]",
         "detail": "backend.api.urls",
         "documentation": {}
     },
@@ -428,7 +428,7 @@
         "kind": 2,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "def promotionViews(request, pk=None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Promotion, StudentSerializer)\n        else:\n            return Utils._get(Promotion, StudentSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_promotion = Promotion.objects.create(\n        )",
+        "peekOfCode": "def promotionViews(request, pk=None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Promotion, PromotionSerializer)\n        else:\n            return Utils._get(Promotion, PromotionSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_promotion = Promotion.objects.create(\n            designation = data['designation']",
         "detail": "backend.api.views",
         "documentation": {}
     },

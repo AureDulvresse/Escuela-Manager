@@ -14,16 +14,16 @@ def promotionViews(request, pk=None) -> Response:
     if request.method == "GET":
 
         if not pk:
-            return Utils._list(Promotion, StudentSerializer)
+            return Utils._list(Promotion, PromotionSerializer)
         
         else:
-            return Utils._get(Promotion, StudentSerializer, pk)
+            return Utils._get(Promotion, PromotionSerializer, pk)
         
     elif request.method == "POST":
         data = request.data
 
         new_promotion = Promotion.objects.create(
-            
+            designation = data['designation']
         )
         
         serializer = StudentSerializer(new_promotion, many = False)
