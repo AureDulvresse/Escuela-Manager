@@ -33,7 +33,7 @@ const StudentList = () => {
           <h4 className="font-semibold text-white">
             Liste des étudiants inscrits
           </h4>
-          <div>
+          {/* <div>
             <div className="relative mt-2">
               <button
                 type="button"
@@ -107,7 +107,7 @@ const StudentList = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="flex items-center">
           <input
@@ -144,18 +144,32 @@ const StudentList = () => {
             .filter((student) => {
               return search.toLowerCase() === ""
                 ? student
-                : (student.first_name.toLowerCase().includes(search) &&
-                    student.last_name.toLowerCase().includes(search)) ||
-                    student.first_name.toLowerCase().includes(search) ||
-                    student.last_name.toLowerCase().includes(search);
+                : (student.first_name
+                    .toLowerCase()
+                    .includes(search.toLocaleLowerCase()) &&
+                    student.last_name
+                      .toLowerCase()
+                      .includes(search.toLocaleLowerCase()) &&
+                    student.sexe
+                      .toLowerCase()
+                      .includes(search.toLocaleLowerCase())) ||
+                    student.first_name
+                      .toLowerCase()
+                      .includes(search.toLocaleLowerCase()) ||
+                    student.last_name
+                      .toLowerCase()
+                      .includes(search.toLocaleLowerCase()) ||
+                    student.sexe
+                      .toLowerCase()
+                      .includes(search.toLocaleLowerCase());
             })
             .map((student, index) => {
-              return (
+              return student != [] ? (
                 <tr
                   className="border-t border-l border-r border-slate-200 py-3 px-1 hover:bg-slate-50"
                   key={index}
                 >
-                  <td className="text-[18px] font-semibold text-center">
+                  <td className="text-[18px] font-semibold text-slate-500 text-center">
                     {index + 1}
                   </td>
                   <td className="text-[18px] text-indigo-600 font-normal text-center">
@@ -181,6 +195,10 @@ const StudentList = () => {
                     </Link>
                   </td>
                 </tr>
+              ) : (
+                <td className="text-slate-500 text-base font-normal text-center">
+                  Aucune donnée
+                </td>
               );
             })}
         </tbody>
