@@ -1,12 +1,41 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .models import Student
-from .serializers import StudentSerializer
+from .models import Student, Promotion
+from .serializers import StudentSerializer, PromotionSerializer
 
 from .utils import Utils
 
 # Create your views here.
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def promotionViews(request, pk=None) -> Response:
+    
+    if request.method == "GET":
+
+        if not pk:
+            return Utils._list(Promotion, StudentSerializer)
+        
+        else:
+            return Utils._get(Promotion, StudentSerializer, pk)
+        
+    elif request.method == "POST":
+        data = request.data
+
+        new_promotion = Promotion.objects.create(
+            
+        )
+        
+        serializer = StudentSerializer(new_promotion, many = False)
+
+        return Response(serializer.data)
+
+    elif request.method == "PUT":
+        return Utils._update(request, Promotion, PromotionSerializer, pk)
+    
+    elif request.method == "DELETE":
+        return Utils._delete(Promotion, pk)
+
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def studentViews(request, pk = None) -> Response:

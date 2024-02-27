@@ -424,6 +424,15 @@
         "documentation": {}
     },
     {
+        "label": "promotionViews",
+        "kind": 2,
+        "importPath": "backend.api.views",
+        "description": "backend.api.views",
+        "peekOfCode": "def promotionViews(request, pk=None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Promotion, StudentSerializer)\n        else:\n            return Utils._get(Promotion, StudentSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_promotion = Promotion.objects.create(\n        )",
+        "detail": "backend.api.views",
+        "documentation": {}
+    },
+    {
         "label": "studentViews",
         "kind": 2,
         "importPath": "backend.api.views",
