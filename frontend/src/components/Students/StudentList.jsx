@@ -164,6 +164,7 @@ const StudentList = () => {
                       .includes(search.toLocaleLowerCase());
             })
             .map((student, index) => {
+              
               return student != [] ? (
                 <tr
                   className="border-t border-l border-r border-slate-200 py-3 px-1 hover:bg-slate-50"
@@ -181,7 +182,7 @@ const StudentList = () => {
                     {student.sexe}
                   </td>
                   <td className="text-[18px] text-indigo-600 font-normal text-center">
-                    Terminal C2
+                    {student.promotion}
                   </td>
                   <td className="flex justify-center gap-3 py-2">
                     <Link className="w-[40px] py-2 px-2 rounded-md text-indigo-600 hover:text-white border border-indigo-400 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 flex items-center justify-center">
