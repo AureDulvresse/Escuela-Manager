@@ -4,7 +4,7 @@ import axios from "axios";
 import ErrorRequest from "../ErrorRequest";
 import ListLoader from "../ListLoader";
 import { Link } from "react-router-dom";
-import { BiPencil, BiTrashAlt } from "react-icons/bi";
+import { BiDownload, BiPencil, BiTrashAlt } from "react-icons/bi";
 
 const StudentList = () => {
   const [search, setSearch] = useState("");
@@ -118,7 +118,7 @@ const StudentList = () => {
             </div>
           </div> */}
         </div>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-3">
           <input
             type="text"
             className="h-[38px] w-full bg-white text-slate-700 focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
@@ -126,7 +126,9 @@ const StudentList = () => {
             placeholder="Taper une recherche..."
             onChange={(event) => setSearch(event.target.value)}
           />
-          
+          <button className="bg-slate-200 h-[32px] px-2 rounded-md shadow-sm">
+            <BiDownload className="text-indigo-600 text-[20px]" />
+          </button>
         </div>
       </div>
       <table className="w-full rounded-b-md">
