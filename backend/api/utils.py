@@ -13,14 +13,34 @@ class Utils:
 
     def _get(model, model_serializer, param) -> Response:
 
+        element = model.objects.get(uuid = param)
+
+        serializer = model_serializer(element, many = False)
+
+        return Response(serializer.data)
+    
+    def _getWithID(model, model_serializer, param) -> Response:
+
         element = model.objects.get(id = param)
 
         serializer = model_serializer(element, many = False)
 
         return Response(serializer.data)
     
-    
     def _update(request, model, model_serializer, param) -> Response:
+        data = request.data
+
+        element = model.objects.get(uuid = param)
+
+        serializer = model_serializer(instance=element, data=data)
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+        return Response(serializer.data)
+    
+    def _updateWithID(request, model, model_serializer, param) -> Response:
         data = request.data
 
         element = model.objects.get(id = param)
@@ -32,9 +52,14 @@ class Utils:
             serializer.save()
 
         return Response(serializer.data)
-    
-    
+
     def _delete(model, param) -> Response:
+        element_to_delete = model.objects.get(uuid = param)
+        element_to_delete.delete()
+
+        return Response("Suppression effectuée")
+    
+    def _deleteWithID(model, param) -> Response:
         element_to_delete = model.objects.get(id = param)
         element_to_delete.delete()
 

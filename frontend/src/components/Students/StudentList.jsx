@@ -48,7 +48,7 @@ const StudentList = () => {
             </th>
           </tr>
         </thead>
-        <tbody className="w-full max-h-[250px] overflow-x-hidden">
+        <tbody className="w-full">
           {listStudent.map((student, index) => {
             return (
               <tr

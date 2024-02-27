@@ -410,7 +410,7 @@
         "kind": 6,
         "importPath": "backend.api.utils",
         "description": "backend.api.utils",
-        "peekOfCode": "class Utils:\n    def _list(model, model_serializer) -> Response:\n        elements = model.objects.all().order_by('-updated_at')\n        serializer = model_serializer(elements, many = True)\n        return Response(serializer.data)\n    def _get(model, model_serializer, param) -> Response:\n        element = model.objects.get(id = param)\n        serializer = model_serializer(element, many = False)\n        return Response(serializer.data)",
+        "peekOfCode": "class Utils:\n    def _list(model, model_serializer) -> Response:\n        elements = model.objects.all().order_by('-updated_at')\n        serializer = model_serializer(elements, many = True)\n        return Response(serializer.data)\n    def _get(model, model_serializer, param) -> Response:\n        element = model.objects.get(uuid = param)\n        serializer = model_serializer(element, many = False)\n        return Response(serializer.data)\n    def _getWithID(model, model_serializer, param) -> Response:",
         "detail": "backend.api.utils",
         "documentation": {}
     },
