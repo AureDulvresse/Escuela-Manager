@@ -374,7 +374,7 @@
         "kind": 6,
         "importPath": "backend.api.serializers",
         "description": "backend.api.serializers",
-        "peekOfCode": "class StudentSerializer(ModelSerializer):\n    class Meta:\n        model = Student\n        fields = \"__all__\"\nclass TeacherSerializer(ModelSerializer):\n    class Meta:\n        model = Teacher\n        fields = \"__all__\"",
+        "peekOfCode": "class StudentSerializer(ModelSerializer):\n    class Meta:\n        model = Student\n        fields = \"__all__\"\nclass TeacherSerializer(ModelSerializer):\n    class Meta:\n        model = Teacher\n        fields = \"__all__\"\nclass PromotionSerializer(ModelSerializer):\n    class Meta:",
         "detail": "backend.api.serializers",
         "documentation": {}
     },
@@ -383,7 +383,16 @@
         "kind": 6,
         "importPath": "backend.api.serializers",
         "description": "backend.api.serializers",
-        "peekOfCode": "class TeacherSerializer(ModelSerializer):\n    class Meta:\n        model = Teacher\n        fields = \"__all__\"",
+        "peekOfCode": "class TeacherSerializer(ModelSerializer):\n    class Meta:\n        model = Teacher\n        fields = \"__all__\"\nclass PromotionSerializer(ModelSerializer):\n    class Meta:\n        model = Promotion\n        fields = \"__all__\"",
+        "detail": "backend.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "PromotionSerializer",
+        "kind": 6,
+        "importPath": "backend.api.serializers",
+        "description": "backend.api.serializers",
+        "peekOfCode": "class PromotionSerializer(ModelSerializer):\n    class Meta:\n        model = Promotion\n        fields = \"__all__\"",
         "detail": "backend.api.serializers",
         "documentation": {}
     },
