@@ -8,6 +8,16 @@ from .utils import Utils
 
 # Create your views here.
 
+        
+@api_view(['GET'])
+def statsView(request) -> Response:
+
+    data = {
+        'total_student' : Student.objects.all().count(),
+    }
+
+    return Response(data);
+
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def promotionView(request, pk=None) -> Response:
     
@@ -71,12 +81,3 @@ def studentView(request, pk = None) -> Response:
     
     elif request.method == "DELETE":
         return Utils._delete(Student, pk)
-        
-@api_view(['GET'])
-def statsView(request) -> Response:
-
-    data = {
-        "total_student" : Student.objects.all().count(),
-    }
-
-    return Response(data);

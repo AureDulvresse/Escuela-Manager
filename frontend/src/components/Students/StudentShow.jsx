@@ -8,6 +8,7 @@ import { BiPrinter } from "react-icons/bi";
 const StudentShow = () => {
   const { pk } = useParams();
 
+  const queryClient = useQueryClient();
   const queryKey = ["showStudent"];
   const { isLoading, data, error } = useQuery({
     queryKey: queryKey,

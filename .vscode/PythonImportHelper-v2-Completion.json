@@ -424,6 +424,15 @@
         "documentation": {}
     },
     {
+        "label": "statsView",
+        "kind": 2,
+        "importPath": "backend.api.views",
+        "description": "backend.api.views",
+        "peekOfCode": "def statsView(request) -> Response:\n    data = {\n        'total_student' : Student.objects.all().count(),\n    }\n    return Response(data);\n@api_view(['GET', 'POST', 'PUT', 'DELETE'])\ndef promotionView(request, pk=None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Promotion, PromotionSerializer)",
+        "detail": "backend.api.views",
+        "documentation": {}
+    },
+    {
         "label": "promotionView",
         "kind": 2,
         "importPath": "backend.api.views",
@@ -438,15 +447,6 @@
         "importPath": "backend.api.views",
         "description": "backend.api.views",
         "peekOfCode": "def studentView(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Student, StudentSerializer)\n        else:\n            return Utils._get(Student, StudentSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_student = Student.objects.create_user(\n            email = data['email'],",
-        "detail": "backend.api.views",
-        "documentation": {}
-    },
-    {
-        "label": "statsView",
-        "kind": 2,
-        "importPath": "backend.api.views",
-        "description": "backend.api.views",
-        "peekOfCode": "def statsView(request) -> Response:\n    data = {\n        \"total_student\" : Student.objects.all().count(),\n    }\n    return Response(data);",
         "detail": "backend.api.views",
         "documentation": {}
     },

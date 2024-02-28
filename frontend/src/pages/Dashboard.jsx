@@ -85,7 +85,7 @@ const Dashboard = () => {
     queryKey: queryKey,
     queryFn: async () =>
       await axios
-        .get("http://128.0.0.1:8000/api/stats/")
+        .get("http://127.0.0.1:8000/api/stats/")
         .then((res) => res.data),
   });
 
@@ -127,11 +127,11 @@ const Dashboard = () => {
     };
 
     setUserData2(prep);
-
-    if (isLoading) return <ListLoader />;
-
-    if (error) return <ErrorRequest error={error.message} />;
   };
+
+  if (isLoading) return <ListLoader />;
+
+  if (error) return <ErrorRequest error={error.message} />;
 
   return (
     <>

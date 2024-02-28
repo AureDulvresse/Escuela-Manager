@@ -12,5 +12,6 @@ urlpatterns = [
     path('promo/<str:pk>', views.promotionView, name="Promotion"),
 
     path('stats/', views.statsView, name="stats"),
+    
     path('seed/', seeders.seed, name="Seeding"),
 ]
