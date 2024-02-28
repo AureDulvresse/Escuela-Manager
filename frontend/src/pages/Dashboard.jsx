@@ -146,7 +146,7 @@ const Dashboard = () => {
           </button>
         </SubTitleLayout>
 
-        <div className="grid grid-cols-4 gap-[30px] mt-5 pb-3">
+        <div className="flex flex-col md:grid grid-cols-4 gap-[30px] mt-5 pb-3">
           <StatBox libelle={"Inscription de cette année"} value={120}>
             <BiSolidGraduation className="text-indigo-600 text-[48px] leading-3" />
           </StatBox>

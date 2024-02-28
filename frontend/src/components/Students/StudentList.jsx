@@ -3,10 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import { BiDownload, BiPencil, BiTrashAlt } from "react-icons/bi";
+import { BiCheck, BiDownload, BiPencil, BiTrashAlt, BiX } from "react-icons/bi";
 
 import ErrorRequest from "../ErrorRequest";
 import ListLoader from "../ListLoader";
+import Modal from "./../Modal";
 
 const StudentList = () => {
   const [search, setSearch] = useState("");
@@ -39,7 +40,31 @@ const StudentList = () => {
   if (error) return <ErrorRequest error={error.message} />;
 
   return (
-    <div>
+    <div className="relative">
+      {modalStatus ? (
+        <Modal title={"Confirmation"}>
+          <div>
+            <h3 className="text-slate-700 text-[20px] mb-2 text-start">
+              Voulez-vous vraiment supprimer cette étudiant ?
+            </h3>
+            <div className="flex items-center justify-end gap-2 mt-4 border-t border-slate-200 pt-3">
+              <button
+                className="bg-red-500 h-[32px] px-2 rounded-md shadow-sm flex items-center"
+                onClick={() => setModalStatus(false)}
+              >
+                <BiX className="text-white text-[20px]" />
+                <span className="text-white text-[20px]">Annuler</span>
+              </button>
+              <button className="bg-indigo-600 h-[32px] px-2 rounded-md shadow-sm flex items-center">
+                <BiCheck className="text-white text-[20px]" />
+                <span className="text-white text-[20px]">Confirmer</span>
+              </button>
+            </div>
+          </div>
+        </Modal>
+      ) : (
+        ""
+      )}
       <div className="flex flex-col">
         <div className="bg-indigo-600 rounded-t-md w-full h-[50px] px-1 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
