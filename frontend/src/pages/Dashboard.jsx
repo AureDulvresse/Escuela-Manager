@@ -77,7 +77,11 @@ const Dashboard = () => {
   }, []);
 
   const queryKey = ["stats"];
-  const { isLoading, data: stats, error } = useQuery({
+  const {
+    isLoading,
+    data: stats,
+    error,
+  } = useQuery({
     queryKey: queryKey,
     queryFn: async () =>
       await axios
