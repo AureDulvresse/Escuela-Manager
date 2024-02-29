@@ -1,10 +1,9 @@
-import React from "react";
 import SearchBar from "../SearchBar";
 import { BiMessage, BiSolidBell, BiUserCircle } from "react-icons/bi";
 
 const Header = () => {
   return (
-    <div className="py-3 px-2 flex items-center justify-between h-[70px] shadow-md">
+    <div className="py-3 px-2 flex items-start md:items-center flex-col md:justify-between md:flex-row h-[70px] shadow-md">
       <SearchBar />
       <div className="flex items-center gap-[24px]">
         <div className="border-slate-200 border-r-[1px] flex items-center justify-center gap-[30px] px-8">

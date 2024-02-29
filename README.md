@@ -30,3 +30,6 @@ School Management App By Aure Dulvresse
 ###
     Statistique
     - Presenter des données statisques  
+
+## TASK TO DO  
+[] Gérer le responsive  

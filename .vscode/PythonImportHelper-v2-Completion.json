@@ -311,7 +311,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class Student(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')\n    promotion = models.ForeignKey(Promotion, on_delete = models.SET_DEFAULT, default = 1)\n    class Meta:\n        verbose_name = \"Etudiant\"\nclass Teacher(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='teacher' , alphabet='abcdefghijklmn123456789')\n    class Meta:\n        verbose_name = \"Prof\"\nclass StudentPromotion(models.Model):",
+        "peekOfCode": "class Student(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')\n    place_born = models.CharField(max_length = 255)\n    promotion = models.ForeignKey(Promotion, on_delete = models.SET_DEFAULT, default = 1)\n    class Meta:\n        verbose_name = \"Etudiant\"\nclass Teacher(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='teacher' , alphabet='abcdefghijklmn123456789')\n    class Meta:\n        verbose_name = \"Prof\"",
         "detail": "backend.api.models",
         "documentation": {}
     },

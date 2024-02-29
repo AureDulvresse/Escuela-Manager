@@ -119,6 +119,7 @@ class Promotion(models.Model):
 class Student(User):
 
     uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')
+    place_born = models.CharField(max_length = 255)
     promotion = models.ForeignKey(Promotion, on_delete = models.SET_DEFAULT, default = 1)
     class Meta:
         verbose_name = "Etudiant"
