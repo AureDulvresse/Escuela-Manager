@@ -280,7 +280,10 @@ const StudentList = () => {
                           })}
                       </td>
                       <td className="flex justify-center gap-3 py-2">
-                        <Link className="w-[40px] py-2 px-2 rounded-md text-indigo-600 hover:text-white border border-indigo-400 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 flex items-center justify-center">
+                        <Link
+                          to={student.uuid + "/update/"}
+                          className="w-[40px] py-2 px-2 rounded-md text-indigo-600 hover:text-white border border-indigo-400 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 flex items-center justify-center"
+                        >
                           <BiPencil className="text-[18px]" />
                         </Link>
                         <button

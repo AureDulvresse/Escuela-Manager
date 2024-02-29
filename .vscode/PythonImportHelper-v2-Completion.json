@@ -42,6 +42,14 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -271,6 +279,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.api.migrations.0002_rename_place_born_student_place_birth",
+        "description": "backend.api.migrations.0002_rename_place_born_student_place_birth",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0001_initial'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='student',\n            old_name='place_born',\n            new_name='place_birth',\n        ),",
+        "detail": "backend.api.migrations.0002_rename_place_born_student_place_birth",
+        "documentation": {}
+    },
+    {
         "label": "ApiConfig",
         "kind": 6,
         "importPath": "backend.api.apps",
@@ -311,7 +328,7 @@
         "kind": 6,
         "importPath": "backend.api.models",
         "description": "backend.api.models",
-        "peekOfCode": "class Student(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')\n    place_born = models.CharField(max_length = 255)\n    promotion = models.ForeignKey(Promotion, on_delete = models.SET_DEFAULT, default = 1)\n    class Meta:\n        verbose_name = \"Etudiant\"\nclass Teacher(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='teacher' , alphabet='abcdefghijklmn123456789')\n    class Meta:\n        verbose_name = \"Prof\"",
+        "peekOfCode": "class Student(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')\n    place_birth = models.CharField(max_length = 255)\n    promotion = models.ForeignKey(Promotion, on_delete = models.SET_DEFAULT, default = 1)\n    class Meta:\n        verbose_name = \"Etudiant\"\nclass Teacher(User):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='teacher' , alphabet='abcdefghijklmn123456789')\n    class Meta:\n        verbose_name = \"Prof\"",
         "detail": "backend.api.models",
         "documentation": {}
     },
