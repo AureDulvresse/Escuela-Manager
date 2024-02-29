@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -12,8 +12,10 @@ import Modal from "./../Modal";
 const StudentList = () => {
   const [search, setSearch] = useState("");
   const [modalStatus, setModalStatus] = useState(false);
+  const [studentToRemove, setStudentToRemove] = useState(0);
 
-  const queryKey = [["getStudent"], ["getPromotion"]];
+  const queryClient = useQueryClient();
+  const queryKey = [["getStudent"], ["getPromotion"], ["removeStudent"]];
   const { isLoading, data, error } = useQuery({
     queryKey: queryKey[0],
     queryFn: async () =>
@@ -55,7 +57,10 @@ const StudentList = () => {
                 <BiX className="text-white text-[20px]" />
                 <span className="text-white text-[20px]">Annuler</span>
               </button>
-              <button className="bg-indigo-600 h-[32px] px-2 rounded-md shadow-sm flex items-center">
+              <button
+                className="bg-indigo-600 h-[32px] px-2 rounded-md shadow-sm flex items-center"
+                onClick={() => removeStudent.mutate()}
+              >
                 <BiCheck className="text-white text-[20px]" />
                 <span className="text-white text-[20px]">Confirmer</span>
               </button>
@@ -236,7 +241,11 @@ const StudentList = () => {
                       </Link>
                       <button
                         className="w-[40px] px-2 py-2 rounded-md text-red-600 hover:text-white border border-red-500 shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 flex items-center justify-center"
-                        onClick={() => setModalStatus(true)}
+                        onClick={(event) => {
+                          setModalStatus(true);
+                          setStudentToRemove(event.target.value);
+                        }}
+                        value={student.id}
                       >
                         <BiTrashAlt className="text-[18px] " />
                       </button>
