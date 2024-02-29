@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { BiCheck, BiDownload, BiPencil, BiTrashAlt, BiX } from "react-icons/bi";
 
 import ErrorRequest from "../ErrorRequest";
@@ -10,12 +12,12 @@ import ListLoader from "../ListLoader";
 import Modal from "./../Modal";
 
 const StudentList = () => {
+  const [studentToRemove, setStudentToRemove] = useState(0);
   const [search, setSearch] = useState("");
   const [modalStatus, setModalStatus] = useState(false);
-  const [studentToRemove, setStudentToRemove] = useState(0);
 
   const queryClient = useQueryClient();
-  const queryKey = [["getStudent"], ["getPromotion"], ["removeStudent"]];
+  const queryKey = [["getStudent"], ["getPromotion"]];
   const { isLoading, data, error } = useQuery({
     queryKey: queryKey[0],
     queryFn: async () =>
@@ -37,46 +39,88 @@ const StudentList = () => {
 
   //console.log(listStudent);
 
+  const removeStudent = useMutation({
+    mutationFn: async () =>
+      await axios.delete(
+        "http://127.0.0.1:8000/api/student/".concat(studentToRemove)
+      ),
+    onSuccess: () => {
+      setModalStatus(false);
+      toast.success("Suppression effectuée avec succès", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      queryClient.invalidateQueries({ queryKey: queryKey[0] });
+    },
+    onError: () => {
+      toast.error("Une erreur s'est produite", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    },
+  });
+
   if (isLoading) return <ListLoader />;
 
   if (error) return <ErrorRequest error={error.message} />;
 
+  console.log(studentToRemove);
+
   return (
-    <div className="relative">
-      {modalStatus ? (
-        <Modal title={"Confirmation"}>
-          <div>
-            <h3 className="text-slate-700 text-[20px] mb-2 text-start">
-              Voulez-vous vraiment supprimer cette étudiant ?
-            </h3>
-            <div className="flex items-center justify-end gap-2 mt-4 border-t border-slate-200 pt-3">
-              <button
-                className="bg-red-500 h-[32px] px-2 rounded-md shadow-sm flex items-center"
-                onClick={() => setModalStatus(false)}
-              >
-                <BiX className="text-white text-[20px]" />
-                <span className="text-white text-[20px]">Annuler</span>
-              </button>
-              <button
-                className="bg-indigo-600 h-[32px] px-2 rounded-md shadow-sm flex items-center"
-                onClick={() => removeStudent.mutate()}
-              >
-                <BiCheck className="text-white text-[20px]" />
-                <span className="text-white text-[20px]">Confirmer</span>
-              </button>
+    <>
+      <ToastContainer />
+      <div className="relative">
+        {modalStatus ? (
+          <Modal title={"Confirmation"}>
+            <div>
+              <h3 className="text-slate-700 text-[20px] mb-2 text-start">
+                Voulez-vous vraiment supprimer cette étudiant ?
+              </h3>
+              <div className="flex items-center justify-end gap-2 mt-4 border-t border-slate-200 pt-3">
+                <button
+                  className="bg-slate-500 h-[32px] px-2 rounded-md shadow-sm flex items-center"
+                  onClick={() => {
+                    setStudentToRemove(0);
+                    setModalStatus(false);
+                  }}
+                >
+                  <BiX className="text-white text-[20px]" />
+                  <span className="text-white text-[20px]">Annuler</span>
+                </button>
+                <button
+                  className="bg-red-500 h-[32px] px-2 rounded-md shadow-sm flex items-center"
+                  onClick={() => removeStudent.mutate()}
+                >
+                  <BiCheck className="text-white text-[20px]" />
+                  <span className="text-white text-[20px]">Confirmer</span>
+                </button>
+              </div>
             </div>
-          </div>
-        </Modal>
-      ) : (
-        ""
-      )}
-      <div className="flex flex-col">
-        <div className="bg-indigo-600 rounded-t-md w-full h-[50px] px-1 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <h4 className="font-semibold text-white">
-              Liste des étudiants inscrits
-            </h4>
-            {/* <div>
+          </Modal>
+        ) : (
+          ""
+        )}
+        <div className="flex flex-col">
+          <div className="bg-indigo-600 rounded-t-md w-full h-[50px] px-1 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <h4 className="font-semibold text-white">
+                Liste des étudiants inscrits
+              </h4>
+              {/* <div>
             <div className="relative mt-2">
               <button
                 type="button"
@@ -151,116 +195,116 @@ const StudentList = () => {
               </ul>
             </div>
           </div> */}
+            </div>
+            <div className="flex items-center gap-3">
+              <input
+                type="text"
+                className="h-[38px] w-full bg-white text-slate-700 focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
+                value={search}
+                placeholder="Taper une recherche..."
+                onChange={(event) => setSearch(event.target.value)}
+              />
+              <button className="bg-slate-200 h-[32px] px-2 rounded-md shadow-sm">
+                <BiDownload className="text-indigo-600 text-[20px]" />
+              </button>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <input
-              type="text"
-              className="h-[38px] w-full bg-white text-slate-700 focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
-              value={search}
-              placeholder="Taper une recherche..."
-              onChange={(event) => setSearch(event.target.value)}
-            />
-            <button className="bg-slate-200 h-[32px] px-2 rounded-md shadow-sm">
-              <BiDownload className="text-indigo-600 text-[20px]" />
-            </button>
-          </div>
-        </div>
-        <table className="w-full rounded-b-md">
-          <thead className="h-[40px] w-full">
-            <tr className="border-t border-l border-r border-slate-200 bg-slate-200 py-2 px-1">
-              <th className="text-[16px] font-light text-slate-700 text-center">
-                N°
-              </th>
-              <th className="text-[16px] font-light text-slate-700 text-center">
-                Nom & Prénom
-              </th>
-              <th className="text-[16px] font-light text-slate-700 text-center">
-                Sexe
-              </th>
-              <th className="text-[16px] font-light text-slate-700 text-center">
-                Promotion
-              </th>
-              <th className="text-[16px] font-light text-slate-700 text-center">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="w-full">
-            {listStudent
-              .filter((student) => {
-                return search.toLowerCase() === ""
-                  ? student
-                  : (student.first_name
-                      .toLowerCase()
-                      .includes(search.toLocaleLowerCase()) &&
-                      student.last_name
+          <table className="w-full rounded-b-md">
+            <thead className="h-[40px] w-full">
+              <tr className="border-t border-l border-r border-slate-200 bg-slate-200 py-2 px-1">
+                <th className="text-[16px] font-light text-slate-700 text-center">
+                  N°
+                </th>
+                <th className="text-[16px] font-light text-slate-700 text-center">
+                  Nom & Prénom
+                </th>
+                <th className="text-[16px] font-light text-slate-700 text-center">
+                  Sexe
+                </th>
+                <th className="text-[16px] font-light text-slate-700 text-center">
+                  Promotion
+                </th>
+                <th className="text-[16px] font-light text-slate-700 text-center">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="w-full">
+              {listStudent
+                .filter((student) => {
+                  return search.toLowerCase() === ""
+                    ? student
+                    : (student.first_name
                         .toLowerCase()
                         .includes(search.toLocaleLowerCase()) &&
-                      student.sexe
-                        .toLowerCase()
-                        .includes(search.toLocaleLowerCase())) ||
-                      student.first_name
-                        .toLowerCase()
-                        .includes(search.toLocaleLowerCase()) ||
-                      student.last_name
-                        .toLowerCase()
-                        .includes(search.toLocaleLowerCase()) ||
-                      student.sexe
-                        .toLowerCase()
-                        .includes(search.toLocaleLowerCase());
-              })
-              .map((student, index) => {
-                return student != [] ? (
-                  <tr
-                    className="border-t border-l border-r border-slate-200 py-3 px-1 hover:bg-slate-50"
-                    key={index}
-                  >
-                    <td className="text-[18px] font-semibold text-slate-500 text-center">
-                      {index + 1}
+                        student.last_name
+                          .toLowerCase()
+                          .includes(search.toLocaleLowerCase()) &&
+                        student.sexe
+                          .toLowerCase()
+                          .includes(search.toLocaleLowerCase())) ||
+                        student.first_name
+                          .toLowerCase()
+                          .includes(search.toLocaleLowerCase()) ||
+                        student.last_name
+                          .toLowerCase()
+                          .includes(search.toLocaleLowerCase()) ||
+                        student.sexe
+                          .toLowerCase()
+                          .includes(search.toLocaleLowerCase());
+                })
+                .map((student, index) => {
+                  return student != [] ? (
+                    <tr
+                      className="border-t border-l border-r border-slate-200 py-3 px-1 hover:bg-slate-50"
+                      key={index}
+                    >
+                      <td className="text-[18px] font-semibold text-slate-500 text-center">
+                        {index + 1}
+                      </td>
+                      <td className="text-[18px] text-indigo-600 font-normal text-center">
+                        <Link to={student.uuid + "/show"}>
+                          {student.first_name} {student.last_name}
+                        </Link>
+                      </td>
+                      <td className="text-[18px] text-indigo-600 font-normal text-center">
+                        {student.sexe}
+                      </td>
+                      <td className="text-[18px] text-indigo-600 font-normal text-center">
+                        {promotions
+                          .filter((promo) => {
+                            return promo.id == student.promotion;
+                          })
+                          .map((promo) => {
+                            return promo.designation;
+                          })}
+                      </td>
+                      <td className="flex justify-center gap-3 py-2">
+                        <Link className="w-[40px] py-2 px-2 rounded-md text-indigo-600 hover:text-white border border-indigo-400 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 flex items-center justify-center">
+                          <BiPencil className="text-[18px]" />
+                        </Link>
+                        <button
+                          className="w-[40px] px-2 py-2 rounded-md text-red-600 hover:text-white border border-red-500 shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 flex items-center justify-center"
+                          onClick={() => {
+                            setStudentToRemove(student.uuid);
+                            setModalStatus(true);
+                          }}
+                        >
+                          <BiTrashAlt className="text-[18px] " />
+                        </button>
+                      </td>
+                    </tr>
+                  ) : (
+                    <td className="text-slate-500 text-base font-normal text-center">
+                      Aucune donnée
                     </td>
-                    <td className="text-[18px] text-indigo-600 font-normal text-center">
-                      <Link to={student.uuid + "/show"}>
-                        {student.first_name} {student.last_name}
-                      </Link>
-                    </td>
-                    <td className="text-[18px] text-indigo-600 font-normal text-center">
-                      {student.sexe}
-                    </td>
-                    <td className="text-[18px] text-indigo-600 font-normal text-center">
-                      {promotions
-                        .filter((promo) => {
-                          return promo.id == student.promotion;
-                        })
-                        .map((promo) => {
-                          return promo.designation;
-                        })}
-                    </td>
-                    <td className="flex justify-center gap-3 py-2">
-                      <Link className="w-[40px] py-2 px-2 rounded-md text-indigo-600 hover:text-white border border-indigo-400 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 flex items-center justify-center">
-                        <BiPencil className="text-[18px]" />
-                      </Link>
-                      <button
-                        className="w-[40px] px-2 py-2 rounded-md text-red-600 hover:text-white border border-red-500 shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 flex items-center justify-center"
-                        onClick={(event) => {
-                          setModalStatus(true);
-                          setStudentToRemove(event.target.value);
-                        }}
-                        value={student.id}
-                      >
-                        <BiTrashAlt className="text-[18px] " />
-                      </button>
-                    </td>
-                  </tr>
-                ) : (
-                  <td className="text-slate-500 text-base font-normal text-center">
-                    Aucune donnée
-                  </td>
-                );
-              })}
-          </tbody>
-        </table>
+                  );
+                })}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
