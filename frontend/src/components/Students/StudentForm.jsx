@@ -1,11 +1,31 @@
+import { useState } from "react";
 import { BiUserPlus } from "react-icons/bi";
 
 const StudentForm = ({ initialValue }) => {
+  const [sexe, setSexe] = useState(() =>
+    initialValue == null ? "" : initialValue.sexe
+  );
+  const [first_name, setFirst_name] = useState(() =>
+    initialValue == null ? "" : initialValue.first_name
+  );
+  const [last_name, setLast_name] = useState(() =>
+    initialValue == null ? "" : initialValue.last_name
+  );
+  const [birthday, setBirthday] = useState(() =>
+    initialValue == null ? "" : initialValue.birthday
+  );
+  const [place_birth, setPlace_birth] = useState(() =>
+    initialValue == null ? "" : initialValue.place_birth
+  );
+  const [email, setEmail] = useState(() =>
+    initialValue == null ? "" : initialValue.email
+  );
 
+  const handleSubmitForm = () => console.log("submit");
 
   return (
     <div className="mt-3">
-      <form className="px-1 py-2 rounded-md">
+      <form className="px-1 py-2 rounded-md" onSubmit={handleSubmitForm}>
         <div className="flex flex-col gap-2 mb-3">
           <label htmlFor="sexe" className="text-slate-700 font-semibold px-1.5">
             Civilité
@@ -13,7 +33,8 @@ const StudentForm = ({ initialValue }) => {
           <select
             name="sexe"
             className="h-[40px] w-40 bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
-            value={initialValue ? initialValue.sexe : ""}
+            value={sexe}
+            onChange={(event) => setSexe(event.target.value)}
           >
             <option value={"M"}>Monsieur</option>
             <option value={"F"}>Madame</option>
@@ -31,24 +52,27 @@ const StudentForm = ({ initialValue }) => {
               type="text"
               name="first_name"
               className="h-[40px] w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
-              value={initialValue ? initialValue.first_name : ""}
+              value={first_name}
               placeholder="Entrer le/les prénom(s)"
+              onChange={(event) => setFirst_name(event.target.value)}
+              required
             />
           </div>
           <div className="mb-2">
             <label
-              htmlFor="first_name"
+              htmlFor="last_name"
               className="text-slate-700 font-semibold px-1.5"
             >
-              Prénom(s)
+              Nom(s)
             </label>
 
             <input
               type="text"
-              name="lat_name"
+              name="last_name"
               className="h-[40px] w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
-              value={initialValue ? initialValue.last_name : ""}
-              placeholder="Entrer le/les nom(s)"
+              value={last_name}
+              placeholder="Entrer le/les prénom(s)"
+              onChange={(event) => setLast_name(event.target.value)}
             />
           </div>
         </div>
@@ -64,23 +88,25 @@ const StudentForm = ({ initialValue }) => {
               type="date"
               name="birthday"
               className="h-[40px] w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
-              value={initialValue ? initialValue.birthday : ""}
+              value={birthday}
               placeholder="Entrer date de naissance"
+              onChange={(event) => setPlace_birth(event.target.value)}
             />
           </div>
           <div className="mb-2">
             <label
-              htmlFor="last_name"
+              htmlFor="place_birth"
               className="text-slate-700 font-semibold px-1.5"
             >
               Lieu de naissance
             </label>
             <input
               type="text"
-              name="place_born"
+              name="place_birth"
               className="h-[40px] w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
-              value={initialValue ? initialValue.place_birth : ""}
+              value={place_birth}
               placeholder="Entrer le lieu de naissance"
+              onChange={(event) => setPlace_birth(event.target.value)}
             />
           </div>
         </div>
@@ -96,8 +122,9 @@ const StudentForm = ({ initialValue }) => {
               type="email"
               name="email"
               className="h-[40px] w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
-              value={initialValue ? initialValue.email : ""}
+              value={email}
               placeholder="Entrer l'adresse mail"
+              onChange={(event) => setEmail(event.target.value)}
             />
           </div>
           <div className="mb-2">
