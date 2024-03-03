@@ -200,9 +200,11 @@ const StudentForm = ({ initialValue }) => {
               onChange={(event) => setPromo(event.target.value)}
             >
               {promotions.map((promo, index) => {
-                <option key={index} value={promo.id}>
-                  {promo.designation}
-                </option>;
+                return (
+                  <option key={index} value={promo.id}>
+                    {promo.designation}
+                  </option>
+                );
               })}
             </select>
           </div>
