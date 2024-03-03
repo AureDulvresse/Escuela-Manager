@@ -98,6 +98,7 @@ const StudentForm = ({ initialValue }) => {
               value={last_name}
               placeholder="Entrer le/les prénom(s)"
               onChange={(event) => setLast_name(event.target.value)}
+              required
             />
           </div>
         </div>
@@ -116,6 +117,7 @@ const StudentForm = ({ initialValue }) => {
               value={birthday}
               placeholder="Entrer date de naissance"
               onChange={(event) => setBirthday(event.target.value)}
+              required
             />
           </div>
           <div className="mb-2">
@@ -132,6 +134,7 @@ const StudentForm = ({ initialValue }) => {
               value={place_birth}
               placeholder="Entrer le lieu de naissance"
               onChange={(event) => setPlace_birth(event.target.value)}
+              required
             />
           </div>
         </div>
@@ -150,6 +153,7 @@ const StudentForm = ({ initialValue }) => {
               value={email}
               placeholder="Entrer l'adresse mail"
               onChange={(event) => setEmail(event.target.value)}
+              required
             />
           </div>
           <div className="mb-2">
@@ -166,6 +170,7 @@ const StudentForm = ({ initialValue }) => {
               value={phone}
               placeholder="Entrer le numéro de téléphone"
               onChange={(event) => setPhone(event.target.value)}
+              required
             />
           </div>
         </div>
