@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { BiUserPlus } from "react-icons/bi";
 
@@ -19,6 +20,16 @@ const StudentForm = ({ initialValue }) => {
   );
   const [email, setEmail] = useState(() =>
     initialValue == null ? "" : initialValue.email
+  );
+  const [phone, setPhone] = useState(
+    initialValue == null ? "" : initialValue.phone
+  );
+  const [photo_profil, setPhotoProfil] = useState(
+    initialValue == null ? "" : initialValue.profil_picture
+  );
+
+  const [promo, setPromo] = useState(
+    initialValue == null ? "" : initialValue.promotion
   );
 
   const handleSubmitForm = () => console.log("submit");
@@ -90,7 +101,7 @@ const StudentForm = ({ initialValue }) => {
               className="h-[40px] w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
               value={birthday}
               placeholder="Entrer date de naissance"
-              onChange={(event) => setPlace_birth(event.target.value)}
+              onChange={(event) => setBirthday(event.target.value)}
             />
           </div>
           <div className="mb-2">
@@ -138,8 +149,9 @@ const StudentForm = ({ initialValue }) => {
               type="tel"
               name="phone"
               className="h-[40px] w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
-              value={initialValue ? initialValue.phone : ""}
+              value={phone}
               placeholder="Entrer le numéro de téléphone"
+              onChange={(event) => setPhone(event.target.value)}
             />
           </div>
         </div>
@@ -155,8 +167,9 @@ const StudentForm = ({ initialValue }) => {
               type="file"
               name="profile_picture"
               className="h-[40px] py-1 w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
-              value={initialValue ? initialValue.photo_profil : ""}
+              value={photo_profil}
               placeholder="Selectionner une photo"
+              onChange={(event) => setPhotoProfil(event.target.value)}
             />
           </div>
           <div className="mb-2">
@@ -169,7 +182,8 @@ const StudentForm = ({ initialValue }) => {
             <select
               name="promotion"
               className="h-[40px] w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
-              value={initialValue ? initialValue.promotion : ""}
+              value={promo}
+              onChange={(event) => setPromo(event.target.value)}
             >
               <option value={"M"}>Monsieur</option>
               <option value={"F"}>Madame</option>
@@ -177,7 +191,10 @@ const StudentForm = ({ initialValue }) => {
           </div>
         </div>
         <div className="mt-4 mb-3">
-          <button className="h-[40px] w-2/5 px-2 rounded-md bg-indigo-600 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 flex items-center justify-center gap-2">
+          <button
+            type="submit"
+            className="h-[40px] w-2/5 px-2 rounded-md bg-indigo-600 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 flex items-center justify-center gap-2"
+          >
             <BiUserPlus className="text-white text-[20px] leading-3" />
             <span className="text-white text-[20px] leading-3">
               Enregistrer
