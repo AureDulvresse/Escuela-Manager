@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+
 import { BiUserPlus } from "react-icons/bi";
 
 const StudentForm = ({ initialValue }) => {
@@ -34,9 +35,9 @@ const StudentForm = ({ initialValue }) => {
     initialValue == null ? "" : initialValue.promotion
   );
 
-  const queryKey = [["getPromotion"]];
+  const queryKey = ["getPromotion"];
   const { data: dataPromo } = useQuery({
-    queryKey: queryKey[0],
+    queryKey: queryKey,
     queryFn: async () =>
       await axios
         .get("http://127.0.0.1:8000/api/promo/")
@@ -199,11 +200,9 @@ const StudentForm = ({ initialValue }) => {
               onChange={(event) => setPromo(event.target.value)}
             >
               {promotions.map((promo, index) => {
-                return (
-                  <option key={index} value={promo.id}>
-                    {promo.designation}
-                  </option>
-                );
+                <option key={index} value={promo.id}>
+                  {promo.designation}
+                </option>;
               })}
             </select>
           </div>

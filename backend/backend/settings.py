@@ -132,7 +132,7 @@ STATIC_URL = 'static/'
 # Média files (Images, Video, Audio)
 # Upload file to "media" folder
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR , 'static/media')
 
 # Default primary key field type

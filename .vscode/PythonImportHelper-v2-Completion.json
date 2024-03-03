@@ -42,14 +42,6 @@
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -276,15 +268,6 @@
         "description": "backend.api.migrations.0001_initial",
         "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='ClassRoom',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('uuid', shortuuid.django_fields.ShortUUIDField(alphabet='opqrstuvwxyz123456789', length=10, max_length=30, prefix='classroom', unique=True)),",
         "detail": "backend.api.migrations.0001_initial",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "backend.api.migrations.0002_rename_place_born_student_place_birth",
-        "description": "backend.api.migrations.0002_rename_place_born_student_place_birth",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0001_initial'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='student',\n            old_name='place_born',\n            new_name='place_birth',\n        ),",
-        "detail": "backend.api.migrations.0002_rename_place_born_student_place_birth",
         "documentation": {}
     },
     {
@@ -598,7 +581,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "LANGUAGE_CODE = 'fr-FR'\nTIME_ZONE = 'Africa/Brazzaville'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Média files (Images, Video, Audio)\n# Upload file to \"media\" folder\nMEDIA_URL = 'media/'",
+        "peekOfCode": "LANGUAGE_CODE = 'fr-FR'\nTIME_ZONE = 'Africa/Brazzaville'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Média files (Images, Video, Audio)\n# Upload file to \"media\" folder\nMEDIA_URL = '/media/'",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -607,7 +590,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "TIME_ZONE = 'Africa/Brazzaville'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Média files (Images, Video, Audio)\n# Upload file to \"media\" folder\nMEDIA_URL = 'media/'\nMEDIA_ROOT = os.path.join(BASE_DIR , 'static/media')",
+        "peekOfCode": "TIME_ZONE = 'Africa/Brazzaville'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Média files (Images, Video, Audio)\n# Upload file to \"media\" folder\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR , 'static/media')",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -616,7 +599,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Média files (Images, Video, Audio)\n# Upload file to \"media\" folder\nMEDIA_URL = 'media/'\nMEDIA_ROOT = os.path.join(BASE_DIR , 'static/media')\n# Default primary key field type",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Média files (Images, Video, Audio)\n# Upload file to \"media\" folder\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR , 'static/media')\n# Default primary key field type",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -625,7 +608,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Média files (Images, Video, Audio)\n# Upload file to \"media\" folder\nMEDIA_URL = 'media/'\nMEDIA_ROOT = os.path.join(BASE_DIR , 'static/media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Média files (Images, Video, Audio)\n# Upload file to \"media\" folder\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR , 'static/media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -634,7 +617,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "STATIC_URL = 'static/'\n# Média files (Images, Video, Audio)\n# Upload file to \"media\" folder\nMEDIA_URL = 'media/'\nMEDIA_ROOT = os.path.join(BASE_DIR , 'static/media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "STATIC_URL = 'static/'\n# Média files (Images, Video, Audio)\n# Upload file to \"media\" folder\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR , 'static/media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -643,7 +626,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "MEDIA_URL = 'media/'\nMEDIA_ROOT = os.path.join(BASE_DIR , 'static/media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "MEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR , 'static/media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
