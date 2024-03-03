@@ -69,9 +69,10 @@ class User(AbstractBaseUser):
     )
     is_active = models.BooleanField(default = True)
     is_admin = models.BooleanField(default = False)
-    profile_picture = models.CharField(
-        max_length = 255,
-        default = "user.png",
+    profile_picture = models.ImageField(
+        verbose_name="Photo d'identité", 
+        upload_to="picture", 
+        default="user.png"
     )
     created_at = models.DateTimeField(auto_now_add  = True)
     updated_at = models.DateTimeField(auto_now = True)
