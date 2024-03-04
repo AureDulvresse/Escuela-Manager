@@ -11,7 +11,9 @@ const StudentRegistration = () => {
     queryKey: queryKey,
     queryFn: async () =>
       await axios
-        .get("http://127.0.0.1:8000/api/student/".concat(pk == null ? "" : pk))
+        .get(
+          "http://127.0.0.1:8000/api/student/".concat(pk == undefined ? "" : pk)
+        )
         .then((res) => res.data),
   });
 
@@ -20,10 +22,10 @@ const StudentRegistration = () => {
   return (
     <div>
       <h1 className="text-[20px] uppercase font-normal text-indigo-600">
-        {pk == null ? "Enregistrement" : "Modification info"} d&apos;un(e)
+        {pk == undefined ? "Enregistrement" : "Modification info"} d&apos;un(e)
         étudiant(e)
       </h1>
-      <StudentForm initialValue={studentData} />
+      <StudentForm initialValue={studentData.lenght === 1 ? studentData : null} />
     </div>
   );
 };

@@ -44,6 +44,24 @@ class MyUserManager(BaseUserManager):
 
         return user
     
+    def create_student(self, email, first_name, last_name, sexe, birthday, place_birth, address, phone, promotion, password = "STU12345678"):
+        user = self.create_user(
+            email = email,
+            first_name = first_name,
+            last_name = last_name,
+            sexe = sexe,
+            birthday = birthday,
+            address = address,
+            phone = phone,
+            password = password,
+        )
+
+        user.place_birth = place_birth
+        user.promotion = promotion
+
+        user.save(using = self._db)
+
+        return user
 
 class User(AbstractBaseUser):
     email = models.EmailField(
@@ -122,6 +140,7 @@ class Student(User):
     uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='stu' , alphabet='abcdefghijklmn123456789')
     place_birth = models.CharField(max_length = 255)
     promotion = models.ForeignKey(Promotion, on_delete = models.SET_DEFAULT, default = 1)
+    
     class Meta:
         verbose_name = "Etudiant"
     

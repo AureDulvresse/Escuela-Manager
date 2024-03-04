@@ -7,7 +7,8 @@ from .serializers import StudentSerializer, PromotionSerializer
 from .utils import Utils
 
 # Create your views here.
-
+def _getPromo(id_promo) -> Promotion:
+    return Promotion.objects.get(id = id_promo)
         
 @api_view(['GET'])
 def statsView(request) -> Response:
@@ -61,15 +62,18 @@ def studentView(request, pk = None) -> Response:
     elif request.method == "POST":
         data = request.data
 
-        new_student = Student.objects.create_user(
+
+        new_student = Student.objects.create_student(
             email = data['email'],
             first_name = data['first_name'],
             last_name = data['last_name'],
             sexe = data['sexe'],
             birthday = data['birthday'],
+            place_birth = data['place_birth'],
             address = data['address'],
             phone = data['phone'],
-            password = data['pwd'],
+            promotion = _getPromo(data['promotion']),
+            password = "STU12345678",
         )
         
         serializer = StudentSerializer(new_student, many = False)
@@ -81,3 +85,4 @@ def studentView(request, pk = None) -> Response:
     
     elif request.method == "DELETE":
         return Utils._delete(Student, pk)
+

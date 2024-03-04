@@ -33,6 +33,10 @@ const StudentForm = ({ initialValue }) => {
     initialValue == null ? "" : initialValue.profil_picture
   );
 
+  const [address, setAddress] = useState(() =>
+    initialValue == null ? "" : initialValue.addess
+  );
+
   const [promo, setPromo] = useState(
     initialValue == null ? "" : initialValue.promotion
   );
@@ -59,6 +63,7 @@ const StudentForm = ({ initialValue }) => {
         place_birth: place_birth,
         phone: phone,
         email: email,
+        address: address,
         profil_picture: photo_profil,
         promotion: promo,
       };
@@ -92,10 +97,6 @@ const StudentForm = ({ initialValue }) => {
       });
     },
   });
-
-  const handleSubmitForm = () => {
-    initialValue == null ? addStudent.mutate() : console.log("Modif");
-  };
 
   return (
     <div>
@@ -231,21 +232,21 @@ const StudentForm = ({ initialValue }) => {
           <div className="flex flex-col md:grid md:grid-cols-2 md:gap-2">
             <div className="mb-3">
               <label
-                htmlFor="profile_picture"
+                htmlFor="address"
                 className="text-slate-700 font-semibold px-1.5"
               >
-                Photo d&apos;identité
+                Adresse
               </label>
               <input
-                type="file"
-                name="profile_picture"
+                type="text"
+                name="address"
                 className="h-[40px] py-1 w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
-                value={photo_profil}
-                placeholder="Selectionner une photo"
-                onChange={(event) => setPhotoProfil(event.target.value)}
+                value={address}
+                placeholder="Entrer l'adresse"
+                onChange={(event) => setAddress(event.target.value)}
               />
             </div>
-            <div className="mb-2">
+            <div className="mb-3">
               <label
                 htmlFor="phone"
                 className="text-slate-700 font-semibold px-1.5"
@@ -267,6 +268,22 @@ const StudentForm = ({ initialValue }) => {
                 })}
               </select>
             </div>
+          </div>
+          <div className="mb-3">
+            <label
+              htmlFor="profile_picture"
+              className="text-slate-700 font-semibold px-1.5"
+            >
+              Photo d&apos;identité
+            </label>
+            <input
+              type="file"
+              name="profile_picture"
+              className="h-[40px] py-1 w-full bg-white focus:bg-slate-50 rounded-md border-[2px] outline-none pl-[14px] focus:border-indigo-600 placeholder:text-14px placeholder:text-slate-400 leading-[20px] font-normal"
+              value={photo_profil}
+              placeholder="Selectionner une photo"
+              onChange={(event) => setPhotoProfil(event.target.value)}
+            />
           </div>
           <div className="mt-4 mb-3">
             <button

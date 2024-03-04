@@ -446,7 +446,7 @@
         "kind": 2,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "def studentView(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Student, StudentSerializer)\n        else:\n            return Utils._get(Student, StudentSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_student = Student.objects.create_user(\n            email = data['email'],",
+        "peekOfCode": "def studentView(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Student, StudentSerializer)\n        else:\n            return Utils._get(Student, StudentSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_student = Student.objects.create_student(\n            email = data['email'],",
         "detail": "backend.api.views",
         "documentation": {}
     },
