@@ -4,7 +4,7 @@ const ListLoader = () => {
       <h4 className="text-indigo-600 text-[30px] leading-3 font-medium">
         Chargement...
       </h4>
-      <div className="rounded-full bg-slate-50 h-4 w-2/3 border border-indigo-500"></div>
+      <div className="rounded-full bg-slate-50 h-4 w-4 border border-indigo-500 animate-spin"></div>
     </div>
   );
 };
