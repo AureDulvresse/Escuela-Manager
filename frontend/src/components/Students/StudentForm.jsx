@@ -60,6 +60,16 @@ const StudentForm = () => {
         transition: Bounce,
       });
       queryClient.invalidateQueries({ queryKey: queryKey[0] });
+      setAddress("");
+      setBirthday("");
+      setEmail("");
+      setFirst_name("");
+      setLast_name("");
+      setPhone("");
+      setPhotoProfil("");
+      setPlace_birth("");
+      setPromo(1);
+      setSexe("M");
     },
     onError: () => {
       toast.error("Une erreur s'est produite", {
