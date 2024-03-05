@@ -7,8 +7,6 @@ from .serializers import StudentSerializer, PromotionSerializer
 from .utils import Utils
 
 # Create your views here.
-def _getPromo(id_promo) -> Promotion:
-    return Promotion.objects.get(id = id_promo)
         
 @api_view(['GET'])
 def statsView(request) -> Response:
@@ -28,7 +26,7 @@ def promotionView(request, pk=None) -> Response:
             return Utils._list(Promotion, PromotionSerializer)
         
         else:
-            return Utils._get(Promotion, PromotionSerializer, pk)
+            return Utils._getWithID(Promotion, PromotionSerializer, pk)
         
     elif request.method == "POST":
         data = request.data
@@ -42,10 +40,10 @@ def promotionView(request, pk=None) -> Response:
         return Response(serializer.data)
 
     elif request.method == "PUT":
-        return Utils._update(request, Promotion, PromotionSerializer, pk)
+        return Utils._updateWithID(request, Promotion, PromotionSerializer, pk)
     
     elif request.method == "DELETE":
-        return Utils._delete(Promotion, pk)
+        return Utils._deleteWithID(Promotion, pk)
 
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
@@ -62,6 +60,7 @@ def studentView(request, pk = None) -> Response:
     elif request.method == "POST":
         data = request.data
 
+        promo = Promotion.objects.get(pk = data['promotion'])
 
         new_student = Student.objects.create_student(
             email = data['email'],
@@ -72,7 +71,7 @@ def studentView(request, pk = None) -> Response:
             place_birth = data['place_birth'],
             address = data['address'],
             phone = data['phone'],
-            promotion = _getPromo(data['promotion']),
+            promotion = promo,
             password = "STU12345678",
         )
         

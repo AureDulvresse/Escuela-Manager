@@ -437,7 +437,7 @@
         "kind": 2,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "def promotionView(request, pk=None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Promotion, PromotionSerializer)\n        else:\n            return Utils._get(Promotion, PromotionSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_promotion = Promotion.objects.create(\n            designation = data['designation']",
+        "peekOfCode": "def promotionView(request, pk=None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Promotion, PromotionSerializer)\n        else:\n            return Utils._getWithID(Promotion, PromotionSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_promotion = Promotion.objects.create(\n            designation = data['designation']",
         "detail": "backend.api.views",
         "documentation": {}
     },
@@ -446,7 +446,7 @@
         "kind": 2,
         "importPath": "backend.api.views",
         "description": "backend.api.views",
-        "peekOfCode": "def studentView(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Student, StudentSerializer)\n        else:\n            return Utils._get(Student, StudentSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_student = Student.objects.create_student(\n            email = data['email'],",
+        "peekOfCode": "def studentView(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Student, StudentSerializer)\n        else:\n            return Utils._get(Student, StudentSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        promo = Promotion.objects.get(pk = data['promotion'])\n        new_student = Student.objects.create_student(",
         "detail": "backend.api.views",
         "documentation": {}
     },

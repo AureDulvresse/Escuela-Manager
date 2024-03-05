@@ -1,23 +1,27 @@
 import { useParams } from "react-router-dom";
-import StudentForm from "./StudentForm";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+
+import StudentForm from "./StudentForm";
+import StudentUpdateForm from "./StudentUpdateForm";
+import { useEffect, useState } from "react";
 
 const StudentRegistration = () => {
   const { pk } = useParams();
+  const [currentStudent, setCurrentStudent] = useState({});
 
-  const queryKey = ["getCurrentStudent"];
-  const { data } = useQuery({
-    queryKey: queryKey,
-    queryFn: async () =>
-      await axios
-        .get(
-          "http://127.0.0.1:8000/api/student/".concat(pk == undefined ? "" : pk)
-        )
-        .then((res) => res.data),
-  });
+  const getCurrentStudent = async () => {
+    const res = await axios.get(
+      "http://127.0.0.1:8000/api/student/".concat(pk)
+    );
+    const data = res.data;
+    return data;
+  };
 
-  const studentData = data || [];
+  useEffect(() => {
+    setCurrentStudent(getCurrentStudent());
+  }, []);
+
+  console.log(currentStudent);
 
   return (
     <div>
@@ -25,7 +29,11 @@ const StudentRegistration = () => {
         {pk == undefined ? "Enregistrement" : "Modification info"} d&apos;un(e)
         étudiant(e)
       </h1>
-      <StudentForm initialValue={studentData.lenght === 1 ? studentData : null} />
+      {pk == undefined ? (
+        <StudentForm />
+      ) : (
+        <StudentUpdateForm currentStudent={currentStudent} />
+      )}
     </div>
   );
 };

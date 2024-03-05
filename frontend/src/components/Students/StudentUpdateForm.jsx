@@ -7,20 +7,20 @@ import { BiUserPlus } from "react-icons/bi";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const StudentForm = () => {
-  const [sexe, setSexe] = useState("M");
-  const [first_name, setFirst_name] = useState("");
-  const [last_name, setLast_name] = useState("");
-  const [birthday, setBirthday] = useState("");
-  const [place_birth, setPlace_birth] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [photo_profil, setPhotoProfil] = useState("");
-  const [address, setAddress] = useState("");
-  const [promo, setPromo] = useState("");
+const StudentUpdateForm = ({ currentStudent }) => {
+  const [sexe, setSexe] = useState(currentStudent.sexe);
+  const [first_name, setFirst_name] = useState(currentStudent.first_name);
+  const [last_name, setLast_name] = useState(currentStudent.last_name);
+  const [birthday, setBirthday] = useState(currentStudent.birthday);
+  const [place_birth, setPlace_birth] = useState(currentStudent.place_birth);
+  const [email, setEmail] = useState(currentStudent.email);
+  const [phone, setPhone] = useState(currentStudent.phone);
+  const [photo_profil, setPhotoProfil] = useState(currentStudent.photo_profil);
+  const [address, setAddress] = useState(currentStudent.address);
+  const [promo, setPromo] = useState(currentStudent.promotion);
 
   const queryClient = useQueryClient();
-  const queryKey = [["getStudent"], ["getPromotion"], ["addStudent"]];
+  const queryKey = [["getStudent"], ["getPromotion"], ["updateStudent"]];
   const { data: dataPromo } = useQuery({
     queryKey: queryKey[1],
     queryFn: async () =>
@@ -29,9 +29,10 @@ const StudentForm = () => {
         .then((res) => res.data),
   });
 
-  const promotions = dataPromo || [];
+    const promotions = dataPromo || [];
+    console.log(currentStudent)
 
-  const addStudent = useMutation({
+  const updateStudent = useMutation({
     mutationFn: async () => {
       const data = {
         sexe: sexe,
@@ -45,10 +46,10 @@ const StudentForm = () => {
         promotion: promo,
         profil_picture: photo_profil,
       };
-      await axios.post("http://127.0.0.1:8000/api/student/", data);
+      await axios.put("http://127.0.0.1:8000/api/student/", data);
     },
     onSuccess: () => {
-      toast.success("Etudiant enrégistré avec succès", {
+      toast.success("Information étudiant mise à jour avec succès", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -267,11 +268,11 @@ const StudentForm = () => {
             <button
               type="button"
               className="h-[40px] w-2/5 px-2 rounded-md bg-indigo-600 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 flex items-center justify-center gap-2"
-              onClick={() => addStudent.mutate()}
+              onClick={() => updateStudent.mutate()}
             >
               <BiUserPlus className="text-white text-[20px] leading-3" />
               <span className="text-white text-[20px] leading-3">
-                Enregistrer
+                Mettre à jour
               </span>
             </button>
           </div>
@@ -281,4 +282,4 @@ const StudentForm = () => {
   );
 };
 
-export default StudentForm;
+export default StudentUpdateForm;
