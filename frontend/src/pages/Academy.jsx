@@ -1,5 +1,10 @@
-import React from "react";
-import { BiBookAlt, BiBookOpen, BiBuildingHouse, BiSolidPencil, BiTime, BiUser } from "react-icons/bi";
+import {
+  BiBookOpen,
+  BiBuildingHouse,
+  BiSolidPencil,
+  BiTime,
+  BiUser,
+} from "react-icons/bi";
 import { NavLink, Outlet } from "react-router-dom";
 import SubTitleLayout from "../components/Layout/SubTitleLayout";
 
