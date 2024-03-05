@@ -15,6 +15,7 @@ import StudentShow from './components/Students/StudentShow';
 import StudentRegistration from "./components/Students/StudentRegistration";
 
 import Notes from "./components/Notes";
+import Administration from "./pages/Administration";
 
 const queryClient = new QueryClient();
 
@@ -75,7 +76,7 @@ const router = createBrowserRouter([
       },
       {
         path: "administration/",
-        element: <Academy />,
+        element: <Administration />,
         errorElement: <ErrorPage />,
         children: [
           {
