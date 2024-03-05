@@ -19,6 +19,7 @@ const StudentRegistration = () => {
 
   useEffect(() => {
     setCurrentStudent(getCurrentStudent());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(currentStudent);
