@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -11,7 +11,19 @@ import { BiUserPlus } from "react-icons/bi";
 import ErrorRequest from "../ErrorRequest";
 
 const StudentUpdateForm = () => {
+  const navigate = Navigate();
   const { pk } = useParams();
+
+  const [sexe, setSexe] = useState("");
+  const [first_name, setFirst_name] = useState("");
+  const [last_name, setLast_name] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [place_birth, setPlace_birth] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [photo_profil, setPhotoProfil] = useState("");
+  const [address, setAddress] = useState("");
+  const [promo, setPromo] = useState("");
 
   const queryClient = useQueryClient();
   const queryKey = [["getdata"], ["getPromotion"], ["updateStudent"]];
@@ -28,19 +40,26 @@ const StudentUpdateForm = () => {
     queryFn: async () =>
       await axios
         .get("http://127.0.0.1:8000/api/student/".concat(pk))
-        .then((res) => res.data),
+        .then((res) => {
+          let data = res.data;
+
+          setAddress(data.address);
+          setBirthday(data.birthday);
+          setEmail(data.email);
+          setFirst_name(data.first_name);
+          setLast_name(data.last_name);
+          setPhone(data.phone);
+          setPhotoProfil(data.profil_picture);
+          setPlace_birth(data.place_birth);
+          setPromo(data.promotion);
+          setSexe(data.sexe);
+
+          return data;
+        }),
   });
 
-  const [sexe, setSexe] = useState(data.sexe);
-  const [first_name, setFirst_name] = useState(data.first_name);
-  const [last_name, setLast_name] = useState(data.last_name);
-  const [birthday, setBirthday] = useState(data.birthday);
-  const [place_birth, setPlace_birth] = useState(data.place_birth);
-  const [email, setEmail] = useState(data.email);
-  const [phone, setPhone] = useState(data.phone);
-  const [photo_profil, setPhotoProfil] = useState(data.photo_profil);
-  const [address, setAddress] = useState(data.address);
-  const [promo, setPromo] = useState(data.promotion);
+  const promotions = dataPromo || [];
+  const currentStudent = data;
 
   const updateStudent = useMutation({
     mutationFn: async () => {
@@ -56,7 +75,10 @@ const StudentUpdateForm = () => {
         promotion: promo,
         profil_picture: photo_profil,
       };
-      await axios.put("http://127.0.0.1:8000/api/student/", data);
+      await axios.put(
+        "http://127.0.0.1:8000/api/student/".concat(currentStudent.uuid),
+        data
+      );
     },
     onSuccess: () => {
       toast.success("Information étudiant mise à jour avec succès", {
@@ -71,6 +93,19 @@ const StudentUpdateForm = () => {
         transition: Bounce,
       });
       queryClient.invalidateQueries({ queryKey: queryKey[0] });
+      setTimeout(() => {
+        setAddress("");
+        setBirthday("");
+        setEmail("");
+        setFirst_name("");
+        setLast_name("");
+        setPhone("");
+        setPhotoProfil("");
+        setPlace_birth("");
+        setPromo("");
+        setSexe("M");
+        navigate("/student/");
+      }, 4000);
     },
     onError: () => {
       toast.error("Une erreur s'est produite", {
@@ -90,10 +125,6 @@ const StudentUpdateForm = () => {
   if (isLoading) console.log("chargement...");
 
   if (error) return <ErrorRequest />;
-
-  const promotions = dataPromo || [];
-
-  console.log(data);
 
   return (
     <div>
