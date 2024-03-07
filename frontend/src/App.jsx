@@ -12,10 +12,12 @@ import Welcome from "./components/Layout/Welcome";
 import Student from "./components/Student";
 import StudentList from "./components/Students/StudentList";
 import StudentShow from './components/Students/StudentShow';
-import StudentRegistration from "./components/Students/StudentRegistration";
+import StudentAddForm from "./components/Students/StudentAddForm";
+import StudentUpdateForm from "./components/Students/StudentUpdateForm";
 
 import Notes from "./components/Notes";
 import Administration from "./pages/Administration";
+
 
 const queryClient = new QueryClient();
 
@@ -52,12 +54,12 @@ const router = createBrowserRouter([
               },
               {
                 path: "new/",
-                element: <StudentRegistration />,
+                element: <StudentAddForm />,
                 errorElement: <ErrorPage />,
               },
               {
                 path: ":pk/update/",
-                element: <StudentRegistration />,
+                element: <StudentUpdateForm />,
                 errorElement: <ErrorPage />,
               },
               {

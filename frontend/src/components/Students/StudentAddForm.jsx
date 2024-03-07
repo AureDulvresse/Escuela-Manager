@@ -7,7 +7,7 @@ import { BiUserPlus } from "react-icons/bi";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const StudentForm = () => {
+const StudentAddForm = () => {
   const [sexe, setSexe] = useState("M");
   const [first_name, setFirst_name] = useState("");
   const [last_name, setLast_name] = useState("");
@@ -291,4 +291,4 @@ const StudentForm = () => {
   );
 };
 
-export default StudentForm;
+export default StudentAddForm;

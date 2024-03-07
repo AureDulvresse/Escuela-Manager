@@ -78,8 +78,6 @@ const StudentList = () => {
 
   if (error) return <ErrorRequest error={error.message} />;
 
-  console.log(studentToRemove);
-
   return (
     <>
       <ToastContainer />
