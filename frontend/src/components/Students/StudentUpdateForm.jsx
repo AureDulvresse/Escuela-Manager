@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -11,7 +11,7 @@ import { BiUserPlus } from "react-icons/bi";
 import ErrorRequest from "../ErrorRequest";
 
 const StudentUpdateForm = () => {
-  const navigate = Navigate();
+  const navigate = useNavigate();
   const { pk } = useParams();
 
   const [sexe, setSexe] = useState("");
@@ -26,7 +26,7 @@ const StudentUpdateForm = () => {
   const [promo, setPromo] = useState("");
 
   const queryClient = useQueryClient();
-  const queryKey = [["getdata"], ["getPromotion"], ["updateStudent"]];
+  const queryKey = [["getCurrentStudent"], ["getPromotion"], ["updateStudent"]];
   const { data: dataPromo } = useQuery({
     queryKey: queryKey[1],
     queryFn: async () =>
@@ -62,6 +62,7 @@ const StudentUpdateForm = () => {
   const currentStudent = data;
 
   const updateStudent = useMutation({
+    mutationKey: queryKey[2],
     mutationFn: async () => {
       const data = {
         sexe: sexe,
@@ -104,8 +105,8 @@ const StudentUpdateForm = () => {
         setPlace_birth("");
         setPromo("");
         setSexe("M");
-        navigate("/student/");
-      }, 4000);
+        navigate("/academy/student/");
+      }, 5000);
     },
     onError: () => {
       toast.error("Une erreur s'est produite", {
