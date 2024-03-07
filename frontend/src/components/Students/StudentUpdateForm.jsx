@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -8,12 +8,13 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { BiUserPlus } from "react-icons/bi";
+import ErrorRequest from "../ErrorRequest";
 
 const StudentUpdateForm = () => {
   const { pk } = useParams();
 
   const queryClient = useQueryClient();
-  const queryKey = [["getCurrentStudent"], ["getPromotion"], ["updateStudent"]];
+  const queryKey = [["getdata"], ["getPromotion"], ["updateStudent"]];
   const { data: dataPromo } = useQuery({
     queryKey: queryKey[1],
     queryFn: async () =>
@@ -22,7 +23,7 @@ const StudentUpdateForm = () => {
         .then((res) => res.data),
   });
 
-  const { data: dataStu } = useQuery({
+  const { isLoading, data, error } = useQuery({
     queryKey: queryKey[0],
     queryFn: async () =>
       await axios
@@ -30,33 +31,16 @@ const StudentUpdateForm = () => {
         .then((res) => res.data),
   });
 
-  const promotions = dataPromo || [];
-  const currentStudent = dataStu;
-  console.log(currentStudent);
-
-  const [sexe, setSexe] = useState("");
-  const [first_name, setFirst_name] = useState("");
-  const [last_name, setLast_name] = useState("");
-  const [birthday, setBirthday] = useState();
-  const [place_birth, setPlace_birth] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [photo_profil, setPhotoProfil] = useState("");
-  const [address, setAddress] = useState("");
-  const [promo, setPromo] = useState(0);
-
-  useEffect((currentStudent) => {
-    setAddress(currentStudent.address);
-    setBirthday(currentStudent.birthday);
-    setEmail(currentStudent.email);
-    setFirst_name(currentStudent.first_name);
-    setLast_name(currentStudent.last_name);
-    setPhone(currentStudent.phone);
-    setPhotoProfil(currentStudent.photo_profil);
-    setPlace_birth(currentStudent.place_birth);
-    setPromo(currentStudent.promotion);
-    setSexe(currentStudent.sexe);
-  }, []);
+  const [sexe, setSexe] = useState(data.sexe);
+  const [first_name, setFirst_name] = useState(data.first_name);
+  const [last_name, setLast_name] = useState(data.last_name);
+  const [birthday, setBirthday] = useState(data.birthday);
+  const [place_birth, setPlace_birth] = useState(data.place_birth);
+  const [email, setEmail] = useState(data.email);
+  const [phone, setPhone] = useState(data.phone);
+  const [photo_profil, setPhotoProfil] = useState(data.photo_profil);
+  const [address, setAddress] = useState(data.address);
+  const [promo, setPromo] = useState(data.promotion);
 
   const updateStudent = useMutation({
     mutationFn: async () => {
@@ -102,6 +86,14 @@ const StudentUpdateForm = () => {
       });
     },
   });
+
+  if (isLoading) console.log("chargement...");
+
+  if (error) return <ErrorRequest />;
+
+  const promotions = dataPromo || [];
+
+  console.log(data);
 
   return (
     <div>
