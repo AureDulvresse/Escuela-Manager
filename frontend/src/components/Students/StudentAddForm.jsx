@@ -17,7 +17,7 @@ const StudentAddForm = () => {
   const [phone, setPhone] = useState("");
   const [photo_profil, setPhotoProfil] = useState("");
   const [address, setAddress] = useState("");
-  const [promo, setPromo] = useState("");
+  const [promo, setPromo] = useState(1);
 
   const queryClient = useQueryClient();
   const queryKey = [["getStudent"], ["getPromotion"], ["addStudent"]];
@@ -89,7 +89,10 @@ const StudentAddForm = () => {
   return (
     <div>
       <ToastContainer />
-      <div className="mt-3">
+      <div className="mt-1">
+        <h3 className="text-indigo-600 text-[24px] leading-3 px-2 py-6 border-b border-indigo-600">
+          Enregistrer un(e) étudiant(e)
+        </h3>
         <form className="px-1 py-2 rounded-md">
           <div className="flex flex-col gap-2 mb-3">
             <label

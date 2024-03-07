@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -8,14 +8,12 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { BiUserPlus } from "react-icons/bi";
-import ListLoader from "../ListLoader";
-import ErrorRequest from "../ErrorRequest";
 
 const StudentUpdateForm = () => {
   const { pk } = useParams();
 
   const queryClient = useQueryClient();
-  const queryKey = [["getStudent"], ["getPromotion"], ["updateStudent"]];
+  const queryKey = [["getCurrentStudent"], ["getPromotion"], ["updateStudent"]];
   const { data: dataPromo } = useQuery({
     queryKey: queryKey[1],
     queryFn: async () =>
@@ -24,7 +22,7 @@ const StudentUpdateForm = () => {
         .then((res) => res.data),
   });
 
-  const { isLoading, data, error } = useQuery({
+  const { data: dataStu } = useQuery({
     queryKey: queryKey[0],
     queryFn: async () =>
       await axios
@@ -33,19 +31,32 @@ const StudentUpdateForm = () => {
   });
 
   const promotions = dataPromo || [];
-  const currentStudent = data || {};
+  const currentStudent = dataStu;
   console.log(currentStudent);
 
-  const [sexe, setSexe] = useState(currentStudent.sexe);
-  const [first_name, setFirst_name] = useState(currentStudent.first_name);
-  const [last_name, setLast_name] = useState(currentStudent.last_name);
-  const [birthday, setBirthday] = useState(currentStudent.birthday);
-  const [place_birth, setPlace_birth] = useState(currentStudent.place_birth);
-  const [email, setEmail] = useState(currentStudent.email);
-  const [phone, setPhone] = useState(currentStudent.phone);
-  const [photo_profil, setPhotoProfil] = useState(currentStudent.photo_profil);
-  const [address, setAddress] = useState(currentStudent.address);
-  const [promo, setPromo] = useState(currentStudent.promotion);
+  const [sexe, setSexe] = useState("");
+  const [first_name, setFirst_name] = useState("");
+  const [last_name, setLast_name] = useState("");
+  const [birthday, setBirthday] = useState();
+  const [place_birth, setPlace_birth] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [photo_profil, setPhotoProfil] = useState("");
+  const [address, setAddress] = useState("");
+  const [promo, setPromo] = useState(0);
+
+  useEffect((currentStudent) => {
+    setAddress(currentStudent.address);
+    setBirthday(currentStudent.birthday);
+    setEmail(currentStudent.email);
+    setFirst_name(currentStudent.first_name);
+    setLast_name(currentStudent.last_name);
+    setPhone(currentStudent.phone);
+    setPhotoProfil(currentStudent.photo_profil);
+    setPlace_birth(currentStudent.place_birth);
+    setPromo(currentStudent.promotion);
+    setSexe(currentStudent.sexe);
+  }, []);
 
   const updateStudent = useMutation({
     mutationFn: async () => {
@@ -92,14 +103,13 @@ const StudentUpdateForm = () => {
     },
   });
 
-  if (isLoading) return <ListLoader />;
-
-  if (error) return <ErrorRequest error={error.message} />;
-
   return (
     <div>
       <ToastContainer />
-      <div className="mt-3">
+      <div className="mt-1">
+        <h3 className="text-indigo-600 text-[24px] leading-3 px-2 py-6 border-b border-indigo-600">
+          Modifier informations un(e) étudiant(e)
+        </h3>
         <form className="px-1 py-2 rounded-md">
           <div className="flex flex-col gap-2 mb-3">
             <label
