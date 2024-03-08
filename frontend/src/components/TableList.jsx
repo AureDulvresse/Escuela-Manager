@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { BiDownload } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
-const TableList = ({ title, listdata }) => {
+const TableList = ({ title, listdata, dataPromo }) => {
   const [search, setSearch] = useState("");
 
   return (
@@ -95,9 +94,6 @@ const TableList = ({ title, listdata }) => {
             placeholder="Taper une recherche..."
             onChange={(event) => setSearch(event.target.value)}
           />
-          <button className="bg-slate-200 h-[32px] px-2 rounded-md shadow-sm">
-            <BiDownload className="text-indigo-600 text-[20px]" />
-          </button>
         </div>
       </div>
       <table className="w-full rounded-b-md">
@@ -108,6 +104,9 @@ const TableList = ({ title, listdata }) => {
             </th>
             <th className="text-[16px] font-light text-slate-700 text-center">
               Nom & Prénom
+            </th>
+            <th className="text-[16px] font-light text-slate-700 text-center">
+              Classe
             </th>
           </tr>
         </thead>
@@ -142,6 +141,15 @@ const TableList = ({ title, listdata }) => {
                     <Link to={data.uuid + "/notes/show"}>
                       {data.first_name} {data.last_name}
                     </Link>
+                  </td>
+                  <td className="text-[18px] text-indigo-600 font-normal text-center">
+                    {dataPromo
+                      .filter((promo) => {
+                        return promo.id == data.promotion;
+                      })
+                      .map((promo) => {
+                        return promo.designation;
+                      })}
                   </td>
                 </tr>
               ) : (
