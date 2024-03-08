@@ -37,9 +37,7 @@ class Utils:
         if serializer.is_valid():
 
             serializer.save()
-            print("UPDATE")
-        else:
-            print("ERROR")
+        
 
         return Response(serializer.data)
     

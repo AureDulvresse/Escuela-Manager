@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -11,7 +11,6 @@ import { BiUserPlus } from "react-icons/bi";
 import ErrorRequest from "../ErrorRequest";
 
 const StudentUpdateForm = () => {
-  const navigate = useNavigate();
   const { pk } = useParams();
 
   const [sexe, setSexe] = useState("");
@@ -21,7 +20,7 @@ const StudentUpdateForm = () => {
   const [place_birth, setPlace_birth] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [photo_profil, setPhotoProfil] = useState("");
+  const [photo_profil, setPhotoProfil] = useState(null);
   const [address, setAddress] = useState("");
   const [promo, setPromo] = useState("");
 
@@ -74,7 +73,7 @@ const StudentUpdateForm = () => {
         email: email,
         address: address,
         promotion: promo,
-        profil_picture: photo_profil,
+        profile_picture: photo_profil,
       };
       await axios.put(
         "http://127.0.0.1:8000/api/student/".concat(currentStudent.uuid),
@@ -94,19 +93,17 @@ const StudentUpdateForm = () => {
         transition: Bounce,
       });
       queryClient.invalidateQueries({ queryKey: queryKey[0] });
-      setTimeout(() => {
-        setAddress("");
-        setBirthday("");
-        setEmail("");
-        setFirst_name("");
-        setLast_name("");
-        setPhone("");
-        setPhotoProfil("");
-        setPlace_birth("");
-        setPromo("");
-        setSexe("M");
-        navigate("/academy/student/");
-      }, 5000);
+
+      setAddress("");
+      setBirthday("");
+      setEmail("");
+      setFirst_name("");
+      setLast_name("");
+      setPhone("");
+      setPhotoProfil(null);
+      setPlace_birth("");
+      setPromo("");
+      setSexe("M");
     },
     onError: () => {
       toast.error("Une erreur s'est produite", {
