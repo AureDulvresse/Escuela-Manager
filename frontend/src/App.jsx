@@ -9,15 +9,14 @@ import Academy from "./pages/Academy";
 
 import Welcome from "./components/Layout/Welcome";
 
-import Student from "./components/Student";
+import Student from "./components/Students/Student";
 import StudentList from "./components/Students/StudentList";
-import StudentShow from './components/Students/StudentShow';
+import StudentShow from "./components/Students/StudentShow";
 import StudentAddForm from "./components/Students/StudentAddForm";
 import StudentUpdateForm from "./components/Students/StudentUpdateForm";
 
-import Notes from "./components/Notes";
+import Notes from "./components/Notes/Notes";
 import Administration from "./pages/Administration";
-
 
 const queryClient = new QueryClient();
 

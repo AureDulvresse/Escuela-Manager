@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import SubTitleLayout from "./Layout/SubTitleLayout";
+import SubTitleLayout from "../Layout/SubTitleLayout";
 
 const Student = () => {
   return (
