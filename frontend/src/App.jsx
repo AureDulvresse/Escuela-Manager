@@ -17,6 +17,9 @@ import StudentUpdateForm from "./components/Students/StudentUpdateForm";
 
 import Notes from "./components/Notes/Notes";
 import Administration from "./pages/Administration";
+import NoteShow from "./components/Notes/NoteShow";
+import ResultatBox from "./components/Notes/ResultatBox";
+import ResultatEditableBox from "./components/Notes/ResultatEditableBox";
 
 const queryClient = new QueryClient();
 
@@ -42,7 +45,7 @@ const router = createBrowserRouter([
             errorElement: <ErrorPage />,
           },
           {
-            path: "student/",
+            path: "student-management/",
             element: <Student />,
             errorElement: <ErrorPage />,
             children: [
@@ -52,28 +55,44 @@ const router = createBrowserRouter([
                 errorElement: <ErrorPage />,
               },
               {
-                path: "new/",
+                path: "student/new/",
                 element: <StudentAddForm />,
                 errorElement: <ErrorPage />,
               },
               {
-                path: ":pk/update/",
+                path: "student/:pk/update/",
                 element: <StudentUpdateForm />,
                 errorElement: <ErrorPage />,
               },
               {
-                path: ":pk/show/",
+                path: "student/:pk/show/",
                 element: <StudentShow />,
                 errorElement: <ErrorPage />,
               },
             ],
           },
           {
-            path: "notes/",
+            path: "notes-management/",
             element: <Notes />,
             errorElement: <ErrorPage />,
           },
-          
+          {
+            path: "notes-management/notes/:pk/show/",
+            element: <NoteShow />,
+            errorElement: <ErrorPage />,
+            children: [
+              {
+                path: "",
+                element: <ResultatBox />,
+                errorElement: <ErrorPage />,
+              },
+              {
+                path: "edit/",
+                element: <ResultatEditableBox />,
+                errorElement: <ErrorPage />,
+              },
+            ],
+          },
         ],
       },
       {

@@ -19,7 +19,7 @@ const Academy = () => {
       >
         <div className="flex items-center justify-between gap-4 px-4">
           <NavLink
-            to={"student/"}
+            to={"student-management/"}
             className="flex items-center justify-around gap-5 px-4 py-3 hover:border-b-indigo-600 hover:border-b-2 cursor-pointer"
           >
             <BiUser className="text-indigo-600 text-[24px] leading-4" />
@@ -28,7 +28,7 @@ const Academy = () => {
             </p>
           </NavLink>
           <NavLink
-            to={"notes/"}
+            to={"notes-management/"}
             className="flex items-center justify-around gap-5 px-4 py-3 hover:border-b-indigo-600 hover:border-b-2 cursor-pointer"
           >
             <BiSolidPencil className="text-indigo-600 text-[24px] leading-4" />
@@ -37,7 +37,7 @@ const Academy = () => {
             </p>
           </NavLink>
           <NavLink
-            to={"course/"}
+            to={"course-management/"}
             className="flex items-center justify-around gap-5 px-4 py-3 hover:border-b-indigo-600 hover:border-b-2 cursor-pointer"
           >
             <BiBookOpen className="text-indigo-600 text-[24px] leading-4" />

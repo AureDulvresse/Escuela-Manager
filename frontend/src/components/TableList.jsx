@@ -138,7 +138,7 @@ const TableList = ({ title, listdata, dataPromo }) => {
                     {index + 1}
                   </td>
                   <td className="text-[18px] text-indigo-600 font-normal text-center">
-                    <Link to={data.uuid + "/notes/show"}>
+                    <Link to={"notes/".concat(data.uuid + "/show")}>
                       {data.first_name} {data.last_name}
                     </Link>
                   </td>

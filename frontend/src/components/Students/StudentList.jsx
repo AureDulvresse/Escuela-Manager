@@ -261,7 +261,7 @@ const StudentList = () => {
                         {index + 1}
                       </td>
                       <td className="text-[18px] text-indigo-600 font-normal text-center">
-                        <Link to={student.uuid + "/show"}>
+                        <Link to={"student/".concat(student.uuid + "/show")}>
                           {student.first_name} {student.last_name}
                         </Link>
                       </td>
@@ -279,7 +279,7 @@ const StudentList = () => {
                       </td>
                       <td className="flex justify-center gap-3 py-2">
                         <Link
-                          to={student.uuid + "/update/"}
+                          to={student.uuid + "student/update/"}
                           className="w-[40px] py-2 px-2 rounded-md text-indigo-600 hover:text-white border border-indigo-400 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 flex items-center justify-center"
                         >
                           <BiPencil className="text-[18px]" />

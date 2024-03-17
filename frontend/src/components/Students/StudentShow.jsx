@@ -83,7 +83,7 @@ const StudentShow = () => {
       </div>
       <div className="mt-4">
         <Link
-          to={"/academy/student/".concat(student.uuid + "/update/")}
+          to={"/academy/student-management/student/".concat(student.uuid + "/update/")}
           className="w-[230px] py-2 px-2 rounded-md bg-indigo-700 text-slate-100 border border-indigo-400 shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 flex items-center justify-center"
         >
           <BiPencil className="text-[18px]" />
