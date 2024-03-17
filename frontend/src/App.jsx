@@ -23,7 +23,7 @@ import ResultatEditableBox from "./components/Notes/ResultatEditableBox";
 
 import Teacher from "./components/Personals/Teacher/Teacher";
 import Personal from "./components/Personals/OtherPersonal/Personal";
-import Salary from "./components/Personals/Salary";
+import Salary from './components/Personals/Salary';
 
 const queryClient = new QueryClient();
 
