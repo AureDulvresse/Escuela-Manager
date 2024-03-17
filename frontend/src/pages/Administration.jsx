@@ -1,10 +1,4 @@
-import {
-  BiGroup,
-  BiMoney,
-  BiSolidPencil,
-  BiTime,
-  BiUser,
-} from "react-icons/bi";
+import { BiGroup, BiMoney, BiTime, BiUser } from "react-icons/bi";
 import { NavLink, Outlet } from "react-router-dom";
 import SubTitleLayout from "../components/Layout/SubTitleLayout";
 
@@ -19,7 +13,7 @@ const Administration = () => {
       >
         <div className="flex items-center justify-between gap-4 px-4">
           <NavLink
-            to={"student/"}
+            to={"teacher/"}
             className="flex items-center justify-around gap-5 px-4 py-3 hover:border-b-indigo-600 hover:border-b-2 cursor-pointer"
           >
             <BiUser className="text-indigo-600 text-[24px] leading-4" />
@@ -28,7 +22,7 @@ const Administration = () => {
             </p>
           </NavLink>
           <NavLink
-            to={"notes/"}
+            to={"personal/"}
             className="flex items-center justify-around gap-5 px-4 py-3 hover:border-b-indigo-600 hover:border-b-2 cursor-pointer"
           >
             <BiGroup className="text-indigo-600 text-[24px] leading-4" />
@@ -37,7 +31,7 @@ const Administration = () => {
             </p>
           </NavLink>
           <NavLink
-            to={"course/"}
+            to={"salary/"}
             className="flex items-center justify-around gap-5 px-4 py-3 hover:border-b-indigo-600 hover:border-b-2 cursor-pointer"
           >
             <BiMoney className="text-indigo-600 text-[24px] leading-4" />
@@ -47,7 +41,7 @@ const Administration = () => {
           </NavLink>
 
           <NavLink
-            to={"/"}
+            to={"planning/"}
             className="flex items-center justify-around gap-5 px-4 py-3 hover:border-b-indigo-600 hover:border-b-2 cursor-pointer"
           >
             <BiTime className="text-indigo-600 text-[24px] leading-4" />

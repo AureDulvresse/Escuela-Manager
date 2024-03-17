@@ -6,6 +6,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Academy from "./pages/Academy";
+import Administration from "./pages/Administration";
 
 import Welcome from "./components/Layout/Welcome";
 
@@ -16,10 +17,13 @@ import StudentAddForm from "./components/Students/StudentAddForm";
 import StudentUpdateForm from "./components/Students/StudentUpdateForm";
 
 import Notes from "./components/Notes/Notes";
-import Administration from "./pages/Administration";
 import NoteShow from "./components/Notes/NoteShow";
 import ResultatBox from "./components/Notes/ResultatBox";
 import ResultatEditableBox from "./components/Notes/ResultatEditableBox";
+
+import Teacher from "./components/Personals/Teacher/Teacher";
+import Personal from "./components/Personals/OtherPersonal/Personal";
+import Salary from "./components/Personals/Salary";
 
 const queryClient = new QueryClient();
 
@@ -106,13 +110,18 @@ const router = createBrowserRouter([
             errorElement: <ErrorPage />,
           },
           {
-            path: "student/",
-            element: <Student />,
+            path: "teacher/",
+            element: <Teacher />,
             errorElement: <ErrorPage />,
           },
           {
-            path: "notes/",
-            element: <Notes />,
+            path: "personal/",
+            element: <Personal />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: "salary/",
+            element: <Salary />,
             errorElement: <ErrorPage />,
           },
         ],

@@ -8,7 +8,7 @@ import ListLoader from "../ListLoader";
 import ErrorRequest from "../ErrorRequest";
 
 const Notes = () => {
-  const queryKey = [["getStudent"], ["getPromotion"]];
+  const queryKey = [["getStudents"], ["getPromotions"]];
   const { isLoading, data, error } = useQuery({
     queryKey: queryKey[0],
     queryFn: async () =>
